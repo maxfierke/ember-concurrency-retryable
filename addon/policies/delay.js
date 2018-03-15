@@ -4,9 +4,9 @@ import { get } from '@ember/object';
 import { timeout } from 'ember-concurrency';
 
 export default class DelayPolicy {
-  constructor({ delay = [], reasons = [] }) {
+  constructor({ delay, reasons }) {
     this.delay = delay;
-    this.reasons = reasons;
+    this.reasons = reasons || [];
 
     assert("The `delay` argument must be a Number or an array of Numbers representing milliseconds", typeof this.delay === 'number' || isArray(this.delay));
     assert("The `reasons` argument must be an array of potentially caught errors", isArray(this.reasons));
@@ -17,8 +17,12 @@ export default class DelayPolicy {
     const hasDelay = retryAttempt < this.delay.length;
 
     if (this.reasons.length > 0) {
-      const reasonIsValid = this.reasons
-        .any((r) => r === reason || reason instanceof r);
+      const reasonIsValid = this.reasons.some((r) => {
+        if (typeof reason === 'object' && typeof r === 'function') {
+          return r === reason || reason instanceof r
+        }
+        return r === reason;
+      });
 
       return hasDelay && reasonIsValid;
     }
