@@ -1,9 +1,3 @@
-import retryable from './retryable';
-import defineModifer from './define-modifier';
-import DelayPolicy from './policies/delay';
-
-export default {
-  retryable,
-  defineModifer,
-  DelayPolicy
-}
+export { default as retryable } from './retryable';
+export { default as defineModifer } from './define-modifier';
+export { default as DelayPolicy } from './policies/delay';
