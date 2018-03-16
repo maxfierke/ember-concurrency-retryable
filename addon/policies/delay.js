@@ -4,16 +4,16 @@ import { get } from '@ember/object';
 import { timeout } from 'ember-concurrency';
 
 export default class DelayPolicy {
-  constructor({ delay, reasons }) {
-    this.delay = delay;
-    this.reasons = reasons || [];
+  constructor({ delay = [], reasons = [] }) {
+    assert("The `delay` argument must be an array of Numbers representing milliseconds", isArray(delay) && delay.every(Number.isFinite));
+    assert("The `reasons` argument must be an array of potentially caught errors", isArray(reasons));
 
-    assert("The `delay` argument must be a Number or an array of Numbers representing milliseconds", typeof this.delay === 'number' || isArray(this.delay));
-    assert("The `reasons` argument must be an array of potentially caught errors", isArray(this.reasons));
+    this.delay = delay;
+    this.reasons = reasons;
   }
 
-  shouldRetry(retryState, reason) {
-    const retryAttempt = get(retryState, 'retryCount');
+  shouldRetry(retryInstance, reason) {
+    const retryAttempt = get(retryInstance, 'retryCount');
     const hasDelay = retryAttempt < this.delay.length;
 
     if (this.reasons.length > 0) {
@@ -30,11 +30,11 @@ export default class DelayPolicy {
     return hasDelay;
   }
 
-  *retry(retryState) {
-    const retryCount = get(retryState, 'retryCount');
+  *retry(retryInstance) {
+    const retryCount = get(retryInstance, 'retryCount');
     const currentDelayMs = this.delay[retryCount];
 
     yield timeout(currentDelayMs);
-    return yield* retryState.run(this);
+    return yield* retryInstance.run();
   }
 }
