@@ -13,7 +13,7 @@ ember install ember-concurrency-retryable
 
 ### via wrapping of `task`
 `ember-concurrency-retryable` adds a `retryable` function which can wrap an
-`ember-concurrency` `TaskProperty`. You can use the addon via this wrapping
+ember-concurrency `TaskProperty`. You can use the addon via this wrapping
 strategy like below:
 
 ```javascript
@@ -37,7 +37,8 @@ export default Component.extend({
 ```
 
 ### via `task` property modifier
-Personally, I think the wrapping method above looks kinda wack. Instead, you
+
+Personally, I think the wrapping method above looks kinda wack, so instead, you
 can also add a `.retryable` modifier to ember-concurrency tasks through the
 magic of reaching into private APIs! `ember-concurrency-retryable` provides a
 `defineModifier` function that can be used somewhere early in the boot process,
@@ -75,7 +76,8 @@ export default Component.extend({
 
 Since this relies on accessing `ember-concurrency`'s `TaskProperty` private
 export and modifying the prototype for that object, I probably shouldn't
-really *recommend* it.
+really *recommend* it, but I think it's relatively safe to do, as the chances of
+that API changing drastically without a suitable replacement seems unlikely.
 
 ## How does it work?
 
@@ -86,7 +88,52 @@ functions and `ember-concurrency` primatives like `timeout` so that it plays
 along nicely with `ember-concurrency` like any other task, and remains fully
 cancelable.
 
-## Adding retry policies
+## Retry Policies
+
+### DelayPolicy
+
+`DelayPolicy` is the basic policy. It allows you to decide what the various
+`delays` will be (in milliseconds) and allows you to specify a list of reasons
+that can be used to limit the situations in which retries happen. `reasons` can
+contain anything that might be thrown by the task that you want to target.
+Reasons are checked against the thrown value by strict equality (`===`) or, if
+the reason is something `class`-like, by `instanceof`. This allows you to limit
+retries to things like `SomeSpecialError`.
+
+Example:
+
+```typescript
+const myDelayPolicy = new DelayPolicy({
+  delay: [300, 600, 1200, 2400],
+  reasons: [UnavailableError]
+});
+```
+
+### ExponentialBackoffPolicy
+
+`ExponentialBackoffPolicy` is a policy which increases the delay time
+exponentially based on some settings. It allows specifing the `multiplier`,
+`minDelay` and `maxDelay` (both in milliseconds), and allows you to specify a
+list of reasons that can be used to limit the situations in which retries
+happen.`reasons` can contain anything that might be thrown by the task that you
+want to target. Reasons are checked against the thrown value by strict equality
+(`===`) or, if the reason is something `class`-like, by `instanceof`. This
+allows you to limit retries to things like `SomeSpecialError`.
+
+Example:
+
+```typescript
+const backoffPolicy = new ExponentialBackoffPolicy({
+  multiplier: 1.5,
+  minDelay: 30,
+  maxDelay: 400
+});
+
+// This policy will retry tasks using the following delays:
+// [30, 45, 67.5, 101.25, 151.875, 227.8125, 341.71875, 400];
+```
+
+### Adding retry policies
 
 Retry policies are just plain old JavaScript classes/objects that correspond
 to a particular interface. You can use those packaged with the addon, extend
@@ -95,10 +142,15 @@ correspond to the following interface:
 
 ```typescript
 interface RetryPolicy {
-  shouldRetry(retryState: TaskRetryState, reason: any): boolean;
-  *retry(retryState: TaskRetryState): IterableIterator<any>;
+  shouldRetry(retryInstance: RetryableTaskInstance, reason: any): boolean;
+  *retry(retryInstance: RetryableTaskInstance): IterableIterator<any>;
 }
 ```
+
+Retry policies are designed to be reusable across tasks and task instances,
+so if you do implment your own, you should avoid storing anything
+instance-specific in the policy itself, and instead use the instance data
+provided as an argument to the callbacks.
 
 ## Motivation
 
@@ -128,7 +180,8 @@ functionality via an addon, to allow for experimentation and refinement.
 
 * Working on something?
   * Open a PR with tests for what you're implementing or fixing
-    * Open with `[WIP]` in the title if you want to start a conversation!
+    * Open with `[WIP]` in the title and tag me if you want to start a
+      conversation!
 
 * Experiencing troubles?
   * Open an issue
