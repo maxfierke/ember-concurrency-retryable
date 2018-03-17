@@ -1,3 +1,5 @@
+import { isEnabled } from "../index";
+
 export default class RetryableTaskInstance {
   constructor({ policy, fn, args }) {
     this.fn = fn;
@@ -10,7 +12,7 @@ export default class RetryableTaskInstance {
     try {
       return yield* this.fn.apply(this, this.args);
     } catch(e) {
-      if (!this.policy.shouldRetry(this, e)) {
+      if (!this.policy.shouldRetry(this, e) || !isEnabled()) {
         throw e;
       }
 
