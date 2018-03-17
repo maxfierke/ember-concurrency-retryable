@@ -7,7 +7,7 @@ import DelayPolicy from 'ember-concurrency-retryable/policies/delay';
 
 module('Unit: DelayPolicy');
 
-class FakeError extends Error {}
+class FakeError {}
 
 test("#shouldRetry checks the retry count against number of delay steps", function (assert) {
   const delayPolicy = new DelayPolicy({ delay: [150, 300] });

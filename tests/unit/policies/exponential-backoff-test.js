@@ -7,7 +7,7 @@ import ExponentialBackoffPolicy from 'ember-concurrency-retryable/policies/expon
 
 module('Unit: ExponentialBackoffPolicy');
 
-class FakeError extends Error {}
+class FakeError {}
 
 test("uses exponentially constructed delays", function (assert) {
   const backoffPolicy = new ExponentialBackoffPolicy({
