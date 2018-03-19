@@ -154,6 +154,25 @@ so if you do implment your own, you should avoid storing anything
 instance-specific in the policy itself, and instead use the instance data
 provided as an argument to the callbacks.
 
+## Testing
+
+Depending on your policy settings, when testing failure cases `ember-concurrency-retryable` might get in the way of your async test timeout settings. Because of this, `ember-concurrency-retryable` provides a switch for disabling it that you may use in these circumstances.
+
+```javascript
+// tests/unit/something-test.js
+import { enable, disable } from 'ember-concurrency-retryable';
+
+test('testing some failure case', function (assert) {
+  disable();
+  
+  // ...test that some task fails and throws an error...
+  
+  enable();
+});
+```
+
+**Ensure you call `enable` again if you rely on `ember-concurrency-retryable` working in other contexts.** This strategy for testing leaves a bit to be desired, so I'd like to investigate other strategies as well. As such, `enable`/`disable` may disappear in favor of something better. For now, it's a helpful escape hatch.
+
 ## Motivation
 
 As long as web apps need a network, network errors will exist. Sometimes
