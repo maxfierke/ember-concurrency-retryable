@@ -9,6 +9,7 @@ export default function retryable(taskProperty, retryPolicy) {
   taskProperty.taskFn = function* (...args) {
     const instance = new RetryableTaskInstance({
       policy: retryPolicy,
+      context: this,
       fn: baseTaskFn,
       args: args
     });
