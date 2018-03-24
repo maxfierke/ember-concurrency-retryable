@@ -1,9 +1,9 @@
 export { default as retryable } from './retryable';
-export { default as defineModifer } from './define-modifier';
+export { default as defineModifier } from './define-modifier';
 export { default as DelayPolicy } from './policies/delay';
 export { default as ExponentialBackoffPolicy } from './policies/exponential-backoff';
 
-export let ENABLED = true;
+let ENABLED = true;
 
 export function isEnabled() {
   return ENABLED;
