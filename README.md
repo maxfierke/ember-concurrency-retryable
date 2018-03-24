@@ -1,6 +1,7 @@
 # ember-concurrency-retryable
 
 [![Build Status](https://travis-ci.org/maxfierke/ember-concurrency-retryable.svg?branch=master)](https://travis-ci.org/maxfierke/ember-concurrency-retryable)
+[![Ember Observer Score](https://emberobserver.com/badges/ember-concurrency-retryable.svg)](https://emberobserver.com/addons/ember-concurrency-retryable)
 
 An Ember addon that adds retry strategies and a task modifier for automatically
 retrying [ember-concurrency](https://github.com/machty/ember-concurrency) tasks.
