@@ -4,6 +4,7 @@ import EmberObject from '@ember/object';
 import { task } from 'ember-concurrency';
 import { module, test } from 'qunit';
 import DelayPolicy from 'ember-concurrency-retryable/policies/delay';
+import sinon from 'sinon';
 
 module('Unit: DelayPolicy');
 
@@ -24,13 +25,15 @@ test("#shouldRetry should check if the reason matches what we want to retry", fu
 });
 
 test("`TaskProperty`s can be extended as restryable with a DelayPolicy", function(assert) {
-  assert.expect(6);
+  assert.expect(10);
 
   const DELAY_MS = 100;
   const done = assert.async(1);
   let taskAttemptCounter = 0;
 
   const delayPolicy = new DelayPolicy({ delay: [DELAY_MS, DELAY_MS] });
+
+  const willRetryStub = sinon.collection.stub(delayPolicy, 'willRetry');
 
   let Obj = EmberObject.extend({
     doStuff: task(function * () {
@@ -52,7 +55,7 @@ test("`TaskProperty`s can be extended as restryable with a DelayPolicy", functio
     obj = Obj.create();
     obj.get('doStuff').perform();
     assert.equal(taskAttemptCounter, 1);
-    //assert.notOk(obj.get('doStuff.last.isRetrying'), 'expect not to have started retrying');
+    assert.notOk(willRetryStub.called, 'expect not to have started retrying');
   });
 
 
@@ -60,18 +63,17 @@ test("`TaskProperty`s can be extended as restryable with a DelayPolicy", functio
     obj.get('doStuff').perform();
 
     assert.equal(taskAttemptCounter, 2);
-    //assert.notOk(obj.get('doStuff.last.isRetrying'), 'expect not to have started retrying');
+    assert.notOk(willRetryStub.called, 'expect not to have started retrying');
   });
 
   run(() => {
     obj.get('doStuff').perform();
     assert.equal(taskAttemptCounter, 3);
-    //assert.ok(obj.get('doStuff.last.isRetrying'), 'expect to have started retrying');
+    assert.ok(willRetryStub.calledOnce, 'expect to have started retrying');
 
     later(() => {
       assert.equal(taskAttemptCounter, 5);
-      //assert.notOk(obj.get('doStuff.last.isRetrying'), 'expect to no longer be marked as retrying');
-      //assert.equal(obj.get('doStuff.last.retryCount'), 2);
+      assert.ok(willRetryStub.calledTwice, 'expect to have been retried twice');
 
       obj.get('doStuff').perform();
       assert.equal(taskAttemptCounter, 6);

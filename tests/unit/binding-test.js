@@ -3,13 +3,9 @@ import { run } from '@ember/runloop';
 import { task } from 'ember-concurrency';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
+import { Policy as NoopPolicy } from 'ember-concurrency-retryable';
 
 module('Unit: function context binding');
-
-class NoopPolicy {
-  shouldRetry() { return false; }
-  retry() {}
-}
 
 test("ember-concurrency-retryable will preserve taskFn binding & args", function(assert) {
   assert.expect(2);

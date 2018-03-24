@@ -2,9 +2,11 @@ import { isArray } from "@ember/array";
 import { assert } from '@ember/debug';
 import { get } from '@ember/object';
 import { timeout } from 'ember-concurrency';
+import Policy from './base';
 
-export default class DelayPolicy {
+export default class DelayPolicy extends Policy {
   constructor({ delay = [], reasons = [] }) {
+    super();
     assert("The `delay` argument must be an array of Numbers representing milliseconds", isArray(delay) && delay.every(Number.isFinite));
     assert("The `reasons` argument must be an array of potentially caught errors", isArray(reasons));
 

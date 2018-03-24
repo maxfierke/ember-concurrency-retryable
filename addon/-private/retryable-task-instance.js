@@ -18,6 +18,9 @@ export default class RetryableTaskInstance {
       }
 
       this.retryCount = this.retryCount + 1;
+
+      this.policy.willRetry(this);
+
       return yield* this.policy.retry(this);
     }
   }

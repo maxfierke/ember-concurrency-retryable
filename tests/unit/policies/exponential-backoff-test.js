@@ -3,6 +3,7 @@ import { Promise } from 'rsvp';
 import EmberObject from '@ember/object';
 import { task } from 'ember-concurrency';
 import { module, test } from 'qunit';
+import sinon from 'sinon';
 import ExponentialBackoffPolicy from 'ember-concurrency-retryable/policies/exponential-backoff';
 
 module('Unit: ExponentialBackoffPolicy');
@@ -42,7 +43,7 @@ test("#shouldRetry should check if the reason matches what we want to retry", fu
 });
 
 test("`TaskProperty`s can be extended as restryable with an ExponentialBackoffPolicy", function(assert) {
-  assert.expect(7);
+  assert.expect(11);
 
   const done = assert.async(1);
   let taskAttemptCounter = 0;
@@ -53,6 +54,7 @@ test("`TaskProperty`s can be extended as restryable with an ExponentialBackoffPo
     maxDelay: 400
   });
 
+  const willRetryStub = sinon.collection.stub(backoffPolicy, 'willRetry');
 
   const expectedDelays = [30, 45, 67.5, 101.25, 151.875, 227.8125, 341.71875, 400];
   assert.deepEqual(backoffPolicy.delay, expectedDelays);
@@ -77,7 +79,7 @@ test("`TaskProperty`s can be extended as restryable with an ExponentialBackoffPo
     obj = Obj.create();
     obj.get('doStuff').perform();
     assert.equal(taskAttemptCounter, 1);
-    //assert.notOk(obj.get('doStuff.last.isRetrying'), 'expect not to have started retrying');
+    assert.notOk(willRetryStub.called, 'expect not to have started retrying');
   });
 
 
@@ -85,23 +87,22 @@ test("`TaskProperty`s can be extended as restryable with an ExponentialBackoffPo
     obj.get('doStuff').perform();
 
     assert.equal(taskAttemptCounter, 2);
-    //assert.notOk(obj.get('doStuff.last.isRetrying'), 'expect not to have started retrying');
+    assert.notOk(willRetryStub.called, 'expect not to have started retrying');
   });
 
   run(() => {
     obj.get('doStuff').perform();
     assert.equal(taskAttemptCounter, 3);
-    //assert.ok(obj.get('doStuff.last.isRetrying'), 'expect to have started retrying');
+    assert.ok(willRetryStub.calledOnce, 'expect to have started retrying');
 
     later(() => {
       assert.equal(taskAttemptCounter, 5);
-      //assert.notOk(obj.get('doStuff.last.isRetrying'), 'expect to no longer be marked as retrying');
-      //assert.equal(obj.get('doStuff.last.retryCount'), 2);
+      assert.ok(willRetryStub.calledTwice, 'expect to have been retried twice');
 
       obj.get('doStuff').perform();
       assert.equal(taskAttemptCounter, 6);
       done();
-    }, 100 + 20);
+    }, 100 + 40);
   });
 });
 

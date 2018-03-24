@@ -143,9 +143,15 @@ from those, or build your own that fit your use case. A retry policy need only
 correspond to the following interface:
 
 ```typescript
+interface RetryableTaskInstance {
+  retryCount: number;
+  run(): IterableIterator<any>;
+}
+
 interface RetryPolicy {
   shouldRetry(retryInstance: RetryableTaskInstance, reason: any): boolean;
-  *retry(retryInstance: RetryableTaskInstance): IterableIterator<any>;
+  willRetry(retryInstance: RetryableTaskInstance): void;
+  retry(retryInstance: RetryableTaskInstance): IterableIterator<any>;
 }
 ```
 
@@ -164,9 +170,9 @@ import { enable, disable } from 'ember-concurrency-retryable';
 
 test('testing some failure case', function (assert) {
   disable();
-  
+
   // ...test that some task fails and throws an error...
-  
+
   enable();
 });
 ```
