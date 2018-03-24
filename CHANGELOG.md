@@ -1,6 +1,6 @@
 # Changelog
 
-### Next
+### 0.3.0
 
 - Added `willRetry` hook to retry policies
 - Fixed typo in `defineModifier` export from module root.
