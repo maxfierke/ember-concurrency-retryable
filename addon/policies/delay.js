@@ -37,6 +37,6 @@ export default class DelayPolicy extends Policy {
     const currentDelayMs = this.delay[retryCount];
 
     yield timeout(currentDelayMs);
-    return yield* retryInstance.run();
+    return yield* super.retry(retryInstance);
   }
 }

@@ -13,15 +13,26 @@ export default class RetryableTaskInstance {
     try {
       return yield* this.fn.apply(this.context, this.args);
     } catch(e) {
+      triggerHook(this, 'didError', e);
+
       if (!this.policy.shouldRetry(this, e) || !isEnabled()) {
         throw e;
       }
 
       this.retryCount = this.retryCount + 1;
 
-      this.policy.willRetry(this);
+      triggerHook(this, 'willRetry', e);
 
-      return yield* this.policy.retry(this);
+      const result = yield* this.policy.retry(this);
+
+      triggerHook(this, 'didRetry');
+
+      return result;
     }
   }
+}
+
+function triggerHook(instance, hookName, ...args) {
+  const hookCallbackArgs = [instance, ...args];
+  instance.policy[hookName].apply(instance.policy, hookCallbackArgs);
 }
