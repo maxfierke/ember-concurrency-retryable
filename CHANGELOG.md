@@ -1,5 +1,9 @@
 # Changelog
 
+### 0.3.1
+
+- Added `didError` and `didRetry` hooks
+
 ### 0.3.0
 
 - Added `willRetry` hook to retry policies

@@ -150,9 +150,11 @@ interface RetryableTaskInstance {
 }
 
 interface RetryPolicy {
+  didError(retryInstance: RetryableTaskInstance, error: Error): void;
   shouldRetry(retryInstance: RetryableTaskInstance, reason: any): boolean;
   willRetry(retryInstance: RetryableTaskInstance): void;
   retry(retryInstance: RetryableTaskInstance): IterableIterator<any>;
+  didRetry(retryInstance: RetryableTaskInstance): void;
 }
 ```
 
