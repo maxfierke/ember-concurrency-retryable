@@ -4,7 +4,6 @@ import EmberObject from '@ember/object';
 import { task } from 'ember-concurrency';
 import { module, test } from 'qunit';
 import DelayPolicy from 'ember-concurrency-retryable/policies/delay';
-import sinon from 'sinon';
 
 module('Unit: DelayPolicy');
 
@@ -24,16 +23,14 @@ test("#shouldRetry should check if the reason matches what we want to retry", fu
   assert.notOk(delayPolicy.shouldRetry({ retryCount: 1 }, new Error("something unexpected")), 'expected not to be told to retry');
 });
 
-test("`TaskProperty`s can be extended as restryable with a DelayPolicy", function(assert) {
-  assert.expect(10);
+test("`TaskProperty`s can be extended as retryable with a DelayPolicy", function(assert) {
+  assert.expect(6);
 
   const DELAY_MS = 100;
   const done = assert.async(1);
   let taskAttemptCounter = 0;
 
   const delayPolicy = new DelayPolicy({ delay: [DELAY_MS, DELAY_MS] });
-
-  const willRetryStub = sinon.collection.stub(delayPolicy, 'willRetry');
 
   let Obj = EmberObject.extend({
     doStuff: task(function * () {
@@ -55,7 +52,6 @@ test("`TaskProperty`s can be extended as restryable with a DelayPolicy", functio
     obj = Obj.create();
     obj.get('doStuff').perform();
     assert.equal(taskAttemptCounter, 1);
-    assert.notOk(willRetryStub.called, 'expect not to have started retrying');
   });
 
 
@@ -63,17 +59,14 @@ test("`TaskProperty`s can be extended as restryable with a DelayPolicy", functio
     obj.get('doStuff').perform();
 
     assert.equal(taskAttemptCounter, 2);
-    assert.notOk(willRetryStub.called, 'expect not to have started retrying');
   });
 
   run(() => {
     obj.get('doStuff').perform();
     assert.equal(taskAttemptCounter, 3);
-    assert.ok(willRetryStub.calledOnce, 'expect to have started retrying');
 
     later(() => {
       assert.equal(taskAttemptCounter, 5);
-      assert.ok(willRetryStub.calledTwice, 'expect to have been retried twice');
 
       obj.get('doStuff').perform();
       assert.equal(taskAttemptCounter, 6);
