@@ -4,6 +4,7 @@ export default class Policy {
   didRetry() {}
   willRetry() {}
   *retry(retryInstance) {
+    retryInstance._triggerEvent('retrying');
     return yield* retryInstance.run();
   }
 }

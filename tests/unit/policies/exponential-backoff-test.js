@@ -78,32 +78,34 @@ test("`TaskProperty`s can be extended as restryable with an ExponentialBackoffPo
   run(() => {
     obj = Obj.create();
     obj.get('doStuff').perform();
-    assert.equal(taskAttemptCounter, 1);
-    assert.notOk(willRetryStub.called, 'expect not to have started retrying');
   });
+
+  assert.equal(taskAttemptCounter, 1);
+  assert.notOk(willRetryStub.called, 'expect not to have started retrying');
 
 
   run(() => {
     obj.get('doStuff').perform();
-
-    assert.equal(taskAttemptCounter, 2);
-    assert.notOk(willRetryStub.called, 'expect not to have started retrying');
   });
+
+  assert.equal(taskAttemptCounter, 2);
+  assert.notOk(willRetryStub.called, 'expect not to have started retrying');
 
   run(() => {
     obj.get('doStuff').perform();
-    assert.equal(taskAttemptCounter, 3);
-    assert.ok(willRetryStub.calledOnce, 'expect to have started retrying');
-
-    later(() => {
-      assert.equal(taskAttemptCounter, 5);
-      assert.ok(willRetryStub.calledTwice, 'expect to have been retried twice');
-
-      obj.get('doStuff').perform();
-      assert.equal(taskAttemptCounter, 6);
-      done();
-    }, 100 + 40);
   });
+
+  assert.equal(taskAttemptCounter, 3);
+  assert.ok(willRetryStub.calledOnce, 'expect to have started retrying');
+
+  later(() => {
+    assert.equal(taskAttemptCounter, 5);
+    assert.ok(willRetryStub.calledTwice, 'expect to have been retried twice');
+
+    obj.get('doStuff').perform();
+    assert.equal(taskAttemptCounter, 6);
+    done();
+  }, 100 + 40);
 });
 
 test("Tasks throw errors after exhausting ExponentialBackoffPolicy delays", function(assert) {
