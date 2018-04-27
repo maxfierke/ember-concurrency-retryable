@@ -1,0 +1,18 @@
+{{docs-hero
+  logo='ember'
+  slimHeading='ember-concurrency-'
+  strongHeading='retryable'
+  byline='automatic task retry policies for ember-concurrency'}}
+
+<div class="docs-container">
+  <div class="docs-section">
+    {{#docs-demo as |demo|}}
+      {{#demo.example name='retryable-demo-snippet.hbs'}}
+        {{retryable-demo}}
+      {{/demo.example}}
+
+      {{demo.snippet 'retryable-demo.js' label='component.js'}}
+      {{demo.snippet 'retryable-demo.hbs' label='template.hbs'}}
+    {{/docs-demo}}
+  </div>
+</div>
