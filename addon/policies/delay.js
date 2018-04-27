@@ -38,7 +38,7 @@ export default class DelayPolicy extends Policy {
    * @method shouldRetry
    * @param {RetryableTaskInstance} retryInstance
    * @param {Error} error
-   * @returns {boolean}
+   * @return {boolean}
    */
   shouldRetry(retryInstance, reason) {
     const retryAttempt = get(retryInstance, 'retryCount');
@@ -64,7 +64,7 @@ export default class DelayPolicy extends Policy {
    *
    * @method retry
    * @param {RetryableTaskInstance} retryInstance
-   * @returns {IterableIterator<any>}
+   * @return {IterableIterator<any>}
    */
   *retry(retryInstance) {
     const retryCount = get(retryInstance, 'retryCount');
@@ -81,7 +81,7 @@ export default class DelayPolicy extends Policy {
    * @method didError
    * @param {RetryableTaskInstance} retryInstance
    * @param {Error} error
-   * @returns {void}
+   * @return {void}
    * @since 0.3.1
    */
 
@@ -92,7 +92,7 @@ export default class DelayPolicy extends Policy {
    * @method willRetry
    * @param {RetryableTaskInstance} retryInstance
    * @param {Error} error
-   * @returns {void}
+   * @return {void}
    * @since 0.3.0
    */
 
@@ -101,7 +101,7 @@ export default class DelayPolicy extends Policy {
    *
    * @method didRetry
    * @param {RetryableTaskInstance} retryInstance
-   * @returns {void}
+   * @return {void}
    * @since 0.3.1
    */
 }

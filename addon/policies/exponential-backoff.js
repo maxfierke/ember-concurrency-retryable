@@ -48,7 +48,7 @@ export default class ExponentialBackoffPolicy extends DelayPolicy {
    * @method didError
    * @param {RetryableTaskInstance} retryInstance
    * @param {Error} error
-   * @returns {void}
+   * @return {void}
    * @since 0.3.1
    */
 
@@ -60,7 +60,7 @@ export default class ExponentialBackoffPolicy extends DelayPolicy {
    * @method shouldRetry
    * @param {RetryableTaskInstance} retryInstance
    * @param {Error} error
-   * @returns {boolean}
+   * @return {boolean}
    */
 
   /**
@@ -70,7 +70,7 @@ export default class ExponentialBackoffPolicy extends DelayPolicy {
    * @method willRetry
    * @param {RetryableTaskInstance} retryInstance
    * @param {Error} error
-   * @returns {void}
+   * @return {void}
    * @since 0.3.0
    */
 
@@ -80,7 +80,7 @@ export default class ExponentialBackoffPolicy extends DelayPolicy {
    *
    * @method retry
    * @param {RetryableTaskInstance} retryInstance
-   * @returns {IterableIterator<any>}
+   * @return {IterableIterator<any>}
    */
 
   /**
@@ -88,7 +88,7 @@ export default class ExponentialBackoffPolicy extends DelayPolicy {
    *
    * @method didRetry
    * @param {RetryableTaskInstance} retryInstance
-   * @returns {void}
+   * @return {void}
    * @since 0.3.1
    */
 }

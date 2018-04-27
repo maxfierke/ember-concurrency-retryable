@@ -14,7 +14,7 @@ export default class Policy {
    * @method didError
    * @param {RetryableTaskInstance} retryInstance
    * @param {Error} error
-   * @returns {void}
+   * @return {void}
    * @since 0.3.1
    */
   didError() {}
@@ -27,7 +27,7 @@ export default class Policy {
    * @method shouldRetry
    * @param {RetryableTaskInstance} retryInstance
    * @param {Error} error
-   * @returns {boolean}
+   * @return {boolean}
    */
   shouldRetry() { return false; }
 
@@ -38,7 +38,7 @@ export default class Policy {
    * @method willRetry
    * @param {RetryableTaskInstance} retryInstance
    * @param {Error} error
-   * @returns {void}
+   * @return {void}
    * @since 0.3.0
    */
   willRetry() {}
@@ -48,7 +48,7 @@ export default class Policy {
    *
    * @method retry
    * @param {RetryableTaskInstance} retryInstance
-   * @returns {IterableIterator<any>}
+   * @return {IterableIterator<any>}
    */
   *retry(retryInstance) {
     retryInstance._triggerEvent('retrying');
@@ -60,7 +60,7 @@ export default class Policy {
    *
    * @method didRetry
    * @param {RetryableTaskInstance} retryInstance
-   * @returns {void}
+   * @return {void}
    * @since 0.3.1
    */
   didRetry() {}
