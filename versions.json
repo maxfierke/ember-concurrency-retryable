@@ -4,5 +4,11 @@
     "tag": null,
     "path": "mf-docs",
     "name": "mf-docs"
+  },
+  "master": {
+    "sha": "ab871708d9eb65286a9c320d820dbd0755890097",
+    "tag": null,
+    "path": "master",
+    "name": "master"
   }
 }
