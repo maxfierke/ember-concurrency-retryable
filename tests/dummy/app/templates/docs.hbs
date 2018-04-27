@@ -1,0 +1,22 @@
+{{#docs-viewer as |viewer|}}
+
+  {{#viewer.nav as |nav|}}
+    {{nav.section "Introduction"}}
+    {{nav.item 'What, Why, and How' 'docs.index'}}
+    {{nav.item 'Usage' 'docs.usage'}}
+
+    {{nav.section "Reference"}}
+    {{nav.item 'Retry Policies' 'docs.retry-policies'}}
+    {{nav.item 'Events' 'docs.events'}}
+    {{nav.item 'Testing' 'docs.testing'}}
+  {{/viewer.nav}}
+
+  {{#viewer.main}}
+    <div class="docs-container">
+      <div class="docs-section">
+        {{outlet}}
+      </div>
+    </div>
+  {{/viewer.main}}
+
+{{/docs-viewer}}
