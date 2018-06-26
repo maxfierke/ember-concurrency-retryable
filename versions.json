@@ -6,10 +6,10 @@
     "name": "mf-docs"
   },
   "master": {
-    "sha": "ca640543e7236ee312e99f4463232a95e412f6ce",
-    "tag": null,
     "path": "master",
-    "name": "master"
+    "name": "master",
+    "sha": "db93553628affdd7e49876202e0d19923d073642",
+    "tag": null
   },
   "v0.4.0": {
     "sha": "ca640543e7236ee312e99f4463232a95e412f6ce",
