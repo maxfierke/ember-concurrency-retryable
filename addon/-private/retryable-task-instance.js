@@ -30,7 +30,8 @@ export default class RetryableTaskInstance {
    */
 
   /**
-   * Number of times the task instance has been retried
+   * Number of times the task instance has been retried. This is reset after
+   * the task instance is successfully retried.
    *
    * @property retryCount
    * @type number
@@ -39,7 +40,8 @@ export default class RetryableTaskInstance {
    */
 
   /**
-   * The last error that triggered a retry of the task instance
+   * The last error that triggered a retry of the task instance. This is reset
+   * after the task instance is successfully retried.
    *
    * @property lastError
    * @type Error?
@@ -92,6 +94,8 @@ export default class RetryableTaskInstance {
       if (this._retrySemaphore === EMPTY_RETRIES) {
         triggerHook(this, 'didRetry');
         this._triggerEvent('retried');
+        this.retryCount = 0;
+        this.lastError = null;
       }
 
       return result;
