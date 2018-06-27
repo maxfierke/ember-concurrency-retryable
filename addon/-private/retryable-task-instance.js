@@ -1,5 +1,8 @@
 import { isEnabled } from "../index";
-import { getTaskInstance } from "./yieldables";
+import {
+  getTaskInstance,
+  RETRYABLE_SYMBOL
+} from "./yieldables";
 
 const EMPTY_RETRIES = 0;
 
@@ -73,6 +76,7 @@ export default class RetryableTaskInstance {
     } catch(e) {
       if (!this.taskInstance) {
         this.taskInstance = yield getTaskInstance;
+        this.taskInstance[RETRYABLE_SYMBOL] = this;
       }
 
       this.lastError = e;
@@ -92,14 +96,18 @@ export default class RetryableTaskInstance {
       this._retrySemaphore--;
 
       if (this._retrySemaphore === EMPTY_RETRIES) {
-        triggerHook(this, 'didRetry');
-        this._triggerEvent('retried');
-        this.retryCount = 0;
-        this.lastError = null;
+        this._didRetry();
       }
 
       return result;
     }
+  }
+
+  _didRetry() {
+    triggerHook(this, 'didRetry');
+    this._triggerEvent('retried');
+    this.retryCount = 0;
+    this.lastError = null;
   }
 
   _triggerEvent(eventName, ...args) {
