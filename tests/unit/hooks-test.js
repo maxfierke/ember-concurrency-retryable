@@ -19,9 +19,9 @@ module('Unit: hooks', function() {
 
     const delayPolicy = new DelayPolicy({ delay: [DELAY_MS, DELAY_MS] });
 
-    const didErrorStub = sinon.collection.stub(delayPolicy, 'didError');
-    const willRetryStub = sinon.collection.stub(delayPolicy, 'willRetry');
-    const didRetryStub = sinon.collection.stub(delayPolicy, 'didRetry');
+    const didErrorStub = sinon.stub(delayPolicy, 'didError');
+    const willRetryStub = sinon.stub(delayPolicy, 'willRetry');
+    const didRetryStub = sinon.stub(delayPolicy, 'didRetry');
 
     let Obj = EmberObject.extend({
       doStuff: task(function * () {

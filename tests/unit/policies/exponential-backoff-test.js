@@ -53,7 +53,7 @@ module('Unit: ExponentialBackoffPolicy', function() {
       maxDelay: 400
     });
 
-    const willRetryStub = sinon.collection.stub(backoffPolicy, 'willRetry');
+    const willRetryStub = sinon.stub(backoffPolicy, 'willRetry');
 
     const expectedDelays = [30, 45, 67.5, 101.25, 151.875, 227.8125, 341.71875, 400];
     assert.deepEqual(backoffPolicy.delay, expectedDelays);
