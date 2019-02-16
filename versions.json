@@ -2,25 +2,34 @@
   "mf-docs": {
     "sha": "b62480000fab36fcf14408cf4bd30793c407c1cc",
     "tag": null,
-    "path": "mf-docs",
-    "name": "mf-docs"
+    "path": "versions/mf-docs",
+    "name": "mf-docs",
+    "oldPath": "mf-docs"
   },
   "master": {
-    "path": "master",
+    "path": "versions/master",
     "name": "master",
     "sha": "6213475e704f0b5031230eb02deb6c9c985a7349",
-    "tag": null
+    "tag": null,
+    "oldPath": "master"
   },
   "v0.4.0": {
     "sha": "ca640543e7236ee312e99f4463232a95e412f6ce",
     "tag": "v0.4.0",
-    "path": "v0.4.0",
-    "name": "v0.4.0"
+    "path": "versions/v0.4.0",
+    "name": "v0.4.0",
+    "oldPath": "v0.4.0"
   },
-  "latest": {
-    "sha": "ca640543e7236ee312e99f4463232a95e412f6ce",
-    "tag": "v0.4.0",
-    "path": "latest",
-    "name": "latest"
+  "-latest": {
+    "path": "",
+    "name": "Latest",
+    "sha": "b9377c9832c0a2a569794b471884f54d92f6138b",
+    "tag": "0.5.0"
+  },
+  "0.5.0": {
+    "path": "versions/0.5.0",
+    "name": "0.5.0",
+    "sha": "b9377c9832c0a2a569794b471884f54d92f6138b",
+    "tag": "0.5.0"
   }
 }
