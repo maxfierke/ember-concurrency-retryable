@@ -12,7 +12,7 @@ import {
 } from 'ember-concurrency';
 import ExponentialBackoffPolicy from 'ember-concurrency-retryable/policies/exponential-backoff';
 
-const COLORS = ['#0000FF', '#8A2BE2', '#A52A2A', '#DC143C', '#20B2AA'];
+const COLORS = ['blue', 'pink', 'darkred', 'red', 'teal'];
 const backoffPolicy = new ExponentialBackoffPolicy({
   multiplier: 1.5,
   minDelay: 30,

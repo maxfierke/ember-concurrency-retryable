@@ -7,6 +7,11 @@
 An Ember addon that adds retry strategies and a task modifier for automatically
 retrying [ember-concurrency](https://github.com/machty/ember-concurrency) tasks.
 
+## Compatibility
+
+* Ember.js v2.18 or above
+* Ember CLI v2.13 or above
+
 ## Installation
 
 ```
@@ -26,7 +31,7 @@ ember install ember-concurrency-retryable
 
 * Experiencing troubles?
   * Open an issue
-  * Reach out to me on the [Ember.js Community Slack](https://embercommunity.slack.com/).
+  * Reach out to me on the [Ember.js Community Discord](https://discordapp.com/invite/zT3asNS).
     You can find me as **@maxfierke** on there.
     (I caution that I do not scale)
 
