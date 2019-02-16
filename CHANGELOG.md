@@ -1,5 +1,9 @@
 # Changelog
 
+### 0.5.0
+- Bumped `ember-cli-babel` dependency to the 7.x series.
+- Dropped support for ember-cli < 2.18
+
 ### 0.4.0
 
 #### Features
