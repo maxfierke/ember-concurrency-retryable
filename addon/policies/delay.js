@@ -68,7 +68,9 @@ export default class DelayPolicy extends Policy {
    */
   *retry(retryInstance) {
     const retryCount = get(retryInstance, 'retryCount');
-    const currentDelayMs = this.delay[retryCount];
+    const currentDelayMs = this.delay[retryCount - 1];
+
+    assert("DelayPolicy.delay was unexpectedly exhausted.", Number.isFinite(currentDelayMs));
 
     yield timeout(currentDelayMs);
     return yield* super.retry(retryInstance);
