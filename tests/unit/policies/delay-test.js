@@ -94,7 +94,7 @@ module('Unit: DelayPolicy', function() {
 
     assert.equal(taskAttemptCounter, 0);
 
-    run(() => {
+    later(() => {
       obj = Obj.create();
       obj.get('doStuff').perform().catch((e) => {
         assert.equal(e.message, "I will never complete", "expected to have thrown original error");
@@ -102,6 +102,6 @@ module('Unit: DelayPolicy', function() {
         done();
       });
       assert.equal(taskAttemptCounter, 1);
-    });
+    }, 620);
   });
 });
