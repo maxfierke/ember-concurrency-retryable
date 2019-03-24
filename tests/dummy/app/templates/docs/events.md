@@ -8,11 +8,11 @@ ember-concurrency when using the `.evented()` modifier.
 Fired each time the task instance is retrying. This can be multiple times for each task
 instance, as depending on the policy multiple retries may occur.
 
-```typescript
-on('someTask:retrying', function (taskInstance: TaskInstance, retryableTaskInstance: RetryableTaskInstance) {
-  // ...
-}
-```
+{{#docs-snippet name='event-retrying-snippet.ts' language='typescript'}}
+  on('someTask:retrying', function (taskInstance: TaskInstance, retryableTaskInstance: RetryableTaskInstance) {
+    // ...
+  }
+{{/docs-snippet}}
 
 ## `TASK_NAME:retried`
 Fired when a task instance has finished being retried. This fires at roughly the
@@ -21,8 +21,8 @@ only want running on successful task instance completion when it had previously
 been retried. This event will only be fired once per task instance, regardless
 of how many times the task instance was retried.
 
-```typescript
+{{#docs-snippet name='event-retried-snippet.ts' language='typescript'}}
 on('someTask:retried', function (taskInstance: TaskInstance, retryableTaskInstance: RetryableTaskInstance) {
   // ...
 }
-```
+{{/docs-snippet}}

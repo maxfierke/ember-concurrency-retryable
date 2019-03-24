@@ -7,7 +7,7 @@
 `Policy` is the no-op or null policy. It provides no retry functionality, but
 should be used as the base class for any policies that are implemented.
 
-```typescript
+<pre><code class="typescript hljs">
 import Policy from 'ember-concurrency-retryable/policies/base';
 
 export class MyPolicy extends Policy {
@@ -15,7 +15,7 @@ export class MyPolicy extends Policy {
     // ... do some custom logic
   }
 }
-```
+</code></pre>
 
 ### DelayPolicy
 
