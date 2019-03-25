@@ -11,6 +11,7 @@ retrying [ember-concurrency](https://github.com/machty/ember-concurrency) tasks.
 
 * Ember.js v2.18 or above
 * Ember CLI v2.13 or above
+* ember-concurrency 0.8.0+
 
 ## Installation
 
@@ -22,42 +23,9 @@ ember install ember-concurrency-retryable
 
 [https://maxfierke.github.io/ember-concurrency-retryable](https://maxfierke.github.io/ember-concurrency-retryable)
 
-## Contributing
+## Contributing / Reporting Issues
 
-* Working on something?
-  * Open a PR with tests for what you're implementing or fixing
-    * Open with `[WIP]` in the title and tag me if you want to start a
-      conversation!
-
-* Experiencing troubles?
-  * Open an issue
-  * Reach out to me on the [Ember.js Community Discord](https://discordapp.com/invite/zT3asNS).
-    You can find me as **@maxfierke** on there.
-    (I caution that I do not scale)
-
-### Installation
-
-* `git clone git@github.com:maxfierke/ember-concurrency-retryable.git`
-* `cd ember-concurrency-retryable`
-* `yarn install`
-
-### Linting
-
-* `yarn lint:js`
-* `yarn lint:js --fix`
-
-### Running tests
-
-* `ember test` – Runs the test suite on the current Ember version
-* `ember test --server` – Runs the test suite in "watch mode"
-* `yarn test` – Runs `ember try:each` to test your addon against multiple Ember versions
-
-### Running the dummy application
-
-* `ember serve`
-* Visit the dummy application at [http://localhost:4200](http://localhost:4200).
-
-For more information on using ember-cli, visit [https://ember-cli.com/](https://ember-cli.com/).
+See the [Contributing](CONTRIBUTING.md) guide for details.
 
 ## License
 

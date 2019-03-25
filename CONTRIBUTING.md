@@ -1,5 +1,16 @@
 # How To Contribute
 
+* Working on something?
+  * Open a PR with tests for what you're implementing or fixing
+    * Open with `[WIP]` in the title and tag me if you want to start a
+      conversation!
+
+* Experiencing troubles?
+  * Open an issue
+  * Reach out to me on the [Ember.js Community Discord](https://discordapp.com/invite/zT3asNS).
+    You can find me as **@maxfierke** on there.
+    (I caution that I do not scale)
+
 ## Installation
 
 * `git clone <repository-url>`
