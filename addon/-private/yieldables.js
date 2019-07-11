@@ -1,7 +1,7 @@
 import {
   yieldableSymbol,
   YIELDABLE_CONTINUE
-} from 'ember-concurrency/utils';
+} from 'ember-concurrency/-private/external/yieldables';
 
 export const RETRYABLE_SYMBOL = '__ec_retryable_instance';
 

@@ -113,8 +113,9 @@ export default class RetryableTaskInstance {
 
   _triggerEvent(eventName, ...args) {
     const taskInstance = this.taskInstance;
+    const triggerEvent = taskInstance.triggerEvent || taskInstance._triggerEvent;
     const eventArgs = [taskInstance, this, ...args];
-    taskInstance._triggerEvent(eventName, ...eventArgs);
+    triggerEvent.call(taskInstance, eventName, ...eventArgs);
   }
 }
 
