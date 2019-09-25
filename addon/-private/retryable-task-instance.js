@@ -1,5 +1,8 @@
 import { isEnabled } from "../index";
-import { getTaskInstance } from "./yieldables";
+import {
+  getTaskInstance,
+  RETRYABLE_SYMBOL
+} from "./yieldables";
 
 const EMPTY_RETRIES = 0;
 
@@ -30,7 +33,8 @@ export default class RetryableTaskInstance {
    */
 
   /**
-   * Number of times the task instance has been retried
+   * Number of times the task instance has been retried. This is reset after
+   * the task instance is successfully retried.
    *
    * @property retryCount
    * @type number
@@ -39,7 +43,8 @@ export default class RetryableTaskInstance {
    */
 
   /**
-   * The last error that triggered a retry of the task instance
+   * The last error that triggered a retry of the task instance. This is reset
+   * after the task instance is successfully retried.
    *
    * @property lastError
    * @type Error?
@@ -71,6 +76,7 @@ export default class RetryableTaskInstance {
     } catch(e) {
       if (!this.taskInstance) {
         this.taskInstance = yield getTaskInstance;
+        this.taskInstance[RETRYABLE_SYMBOL] = this;
       }
 
       this.lastError = e;
@@ -90,20 +96,23 @@ export default class RetryableTaskInstance {
       this._retrySemaphore--;
 
       if (this._retrySemaphore === EMPTY_RETRIES) {
-        triggerHook(this, 'didRetry');
-        this._triggerEvent('retried');
+        this._didRetry();
+        this.taskInstance[RETRYABLE_SYMBOL] = null;
       }
 
       return result;
     }
   }
 
+  _didRetry() {
+    triggerHook(this, 'didRetry');
+    this._triggerEvent('retried');
+    this.retryCount = 0;
+    this.lastError = null;
+  }
+
   _triggerEvent(eventName, ...args) {
     const taskInstance = this.taskInstance;
-
-    // No-op if on an e-c <= 0.8.17
-    if (!taskInstance._triggerEvent) { return; }
-
     const eventArgs = [taskInstance, this, ...args];
     taskInstance._triggerEvent(eventName, ...eventArgs);
   }
