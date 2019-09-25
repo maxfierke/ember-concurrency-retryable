@@ -4,8 +4,8 @@ import { task } from 'ember-concurrency';
 import { module, test } from 'qunit';
 import {
   isEnabled,
-  enable,
-  disable,
+  enableTaskRetries,
+  disableTaskRetries,
   DelayPolicy
 } from 'ember-concurrency-retryable';
 
@@ -33,7 +33,7 @@ module('Unit: disabling retryability', function() {
     run(() => {
       obj = Obj.create();
 
-      disable();
+      disableTaskRetries();
       assert.notOk(isEnabled(), "expected retryablity to be disabled");
 
       obj.get('doStuff').perform().catch((e) => assert.equal(e.message, 'I will never complete'));
@@ -43,7 +43,7 @@ module('Unit: disabling retryability', function() {
     run(() => {
       taskAttemptCounter = 0;
 
-      enable();
+      enableTaskRetries();
       assert.ok(isEnabled(), "expected retryablity to be enabled");
 
       obj.get('doStuff').perform().catch((e) => assert.equal(e.message, 'I will never complete'));

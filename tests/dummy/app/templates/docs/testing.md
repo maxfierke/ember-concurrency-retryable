@@ -5,8 +5,8 @@ Depending on your policy settings, when testing failure cases `ember-concurrency
 ```javascript
 // tests/unit/something-test.js
 import {
-  enable as enableTaskRetries,
-  disable as disableTaskRetries
+  enableTaskRetries,
+  disableTaskRetries
 } from 'ember-concurrency-retryable';
 
 test('testing some failure case', function (assert) {
