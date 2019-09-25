@@ -32,11 +32,11 @@ import sinon from 'sinon';
 
 module('Unit: Something', function (hooks) {
   hooks.afterEach(function() {
-    sinon.collection.restore();
+    sinon.restore();
   });
 
   test('testing some failure case', function (assert) {
-    sinon.collection.stub(MyRadPolicy, 'shouldRetry').returns(false);
+    sinon.stub(MyRadPolicy, 'shouldRetry').returns(false);
 
     // ...test that some task fails and throws an error...
   });

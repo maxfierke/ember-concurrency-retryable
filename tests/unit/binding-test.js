@@ -5,39 +5,39 @@ import { module, test } from 'qunit';
 import sinon from 'sinon';
 import { Policy as NoopPolicy } from 'ember-concurrency-retryable';
 
-module('Unit: function context binding');
+module('Unit: function context binding', function() {
+  test("ember-concurrency-retryable will preserve taskFn binding & args", function(assert) {
+    assert.expect(2);
 
-test("ember-concurrency-retryable will preserve taskFn binding & args", function(assert) {
-  assert.expect(2);
+    const done = assert.async(1);
 
-  const done = assert.async(1);
+    const queryRecordStub = sinon.stub();
 
-  const queryRecordStub = sinon.stub();
+    const delayPolicy = new NoopPolicy();
 
-  const delayPolicy = new NoopPolicy();
+    let Obj = EmberObject.extend({
+      init() {
+        this._super(...arguments);
 
-  let Obj = EmberObject.extend({
-    init() {
-      this._super(...arguments);
+        this.set('store', {
+          queryRecord: queryRecordStub
+        })
+      },
+      getAThing: task(function* (value) {
+        yield this.store.queryRecord('blahh', value);
+      }).retryable(delayPolicy)
+    });
 
-      this.set('store', {
-        queryRecord: queryRecordStub
-      })
-    },
-    getAThing: task(function* (value) {
-      yield this.store.queryRecord('blahh', value);
-    }).retryable(delayPolicy)
-  });
+    let obj;
 
-  let obj;
+    run(() => {
+      obj = Obj.create();
 
-  run(() => {
-    obj = Obj.create();
+      obj.get('getAThing').perform(123);
 
-    obj.get('getAThing').perform(123);
-
-    assert.ok(queryRecordStub.calledOnce, "expected queryRecord to have been called");
-    assert.ok(queryRecordStub.calledWith('blahh', 123), "expected arguments to make their way through");
-    done();
+      assert.ok(queryRecordStub.calledOnce, "expected queryRecord to have been called");
+      assert.ok(queryRecordStub.calledWith('blahh', 123), "expected arguments to make their way through");
+      done();
+    });
   });
 });

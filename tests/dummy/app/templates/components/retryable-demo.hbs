@@ -1,7 +1,7 @@
 {{!-- BEGIN-SNIPPET retryable-demo.hbs --}}
 <ul>
   {{#each logs as |log|}}
-    <li style={{color log.color}}>{{log.message}}</li>
+    <li class="line-item line-item--{{log.color}}">{{log.message}}</li>
   {{/each}}
 </ul>
 {{!-- END-SNIPPET --}}
