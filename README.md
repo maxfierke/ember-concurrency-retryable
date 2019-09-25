@@ -11,7 +11,7 @@ retrying [ember-concurrency](https://github.com/machty/ember-concurrency) tasks.
 
 * Ember.js v2.18 or above
 * Ember CLI v2.13 or above
-* ember-concurrency 0.8.0+
+* ember-concurrency 1.0.0+
 
 ## Installation
 
