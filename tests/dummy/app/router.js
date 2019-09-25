@@ -12,6 +12,7 @@ Router.map(function() {
     this.route('motivation');
     this.route('retry-policies');
     this.route('events');
+    this.route('looping-tasks');
     this.route('testing');
     this.route('api', function() {
       this.route('item', { path: '/*path' });
