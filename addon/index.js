@@ -4,7 +4,7 @@ export { default as Policy } from './policies/base';
 export { default as DelayPolicy } from './policies/delay';
 export { default as ExponentialBackoffPolicy } from './policies/exponential-backoff';
 export {
-  retried
+  retriedSignal
 } from './-private/yieldables';
 
 let ENABLED = true;

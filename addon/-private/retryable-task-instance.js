@@ -97,6 +97,7 @@ export default class RetryableTaskInstance {
 
       if (this._retrySemaphore === EMPTY_RETRIES) {
         this._didRetry();
+        this.taskInstance[RETRYABLE_SYMBOL] = null;
       }
 
       return result;
@@ -112,10 +113,6 @@ export default class RetryableTaskInstance {
 
   _triggerEvent(eventName, ...args) {
     const taskInstance = this.taskInstance;
-
-    // No-op if on an e-c <= 0.8.17
-    if (!taskInstance._triggerEvent) { return; }
-
     const eventArgs = [taskInstance, this, ...args];
     taskInstance._triggerEvent(eventName, ...eventArgs);
   }

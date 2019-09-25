@@ -4,7 +4,7 @@ import EmberObject from '@ember/object';
 import Evented, { on } from '@ember/object/evented';
 import { task } from 'ember-concurrency';
 import { module, test } from 'qunit';
-import { DelayPolicy, retried } from 'ember-concurrency-retryable';
+import { DelayPolicy, retriedSignal } from 'ember-concurrency-retryable';
 import sinon from 'sinon';
 
 module('Unit: looping tasks');
@@ -17,7 +17,7 @@ test("looping tasks do not retain retry state between sets of failures", functio
   let taskAttemptCounter = 0;
 
   const delayPolicy = new DelayPolicy({ delay: [DELAY_MS, DELAY_MS, DELAY_MS] });
-  const retriedStub = sinon.collection.stub();
+  const retriedStub = sinon.stub();
 
   const FAIL_ATTEMPTS = [3, 4, 7, 8];
 
@@ -33,7 +33,7 @@ test("looping tasks do not retain retry state between sets of failures", functio
         }
 
         yield Promise.resolve('stuff happened');
-        yield retried();
+        yield retriedSignal;
       }
     }).drop().evented().retryable(delayPolicy),
 

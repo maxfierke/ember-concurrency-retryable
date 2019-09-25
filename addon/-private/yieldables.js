@@ -12,7 +12,7 @@ export const getTaskInstance = {
   }
 };
 
-const retriedYieldable = {
+export const retriedSignal = {
   [yieldableSymbol](taskInstance, resumeIndex) {
     const retryableInstance = taskInstance[RETRYABLE_SYMBOL];
 
@@ -23,7 +23,3 @@ const retriedYieldable = {
     taskInstance.proceed(resumeIndex, YIELDABLE_CONTINUE);
   }
 };
-
-export function retried() {
-  return retriedYieldable;
-}
