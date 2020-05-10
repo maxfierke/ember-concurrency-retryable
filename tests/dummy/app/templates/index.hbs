@@ -1,17 +1,14 @@
-{{docs-hero
-  logo="Ember"
-  heading="Concurrency Retryable"
-  byline="Retry policies for ember-concurrency tasks"}}
+<DocsHero @logo="Ember" @heading="Concurrency Retryable" @byline="Retry policies for ember-concurrency tasks" />
 
 <div class="docs-container">
   <div class="docs-section">
-    {{#docs-demo as |demo|}}
-      {{#demo.example name="retryable-demo-snippet.hbs"}}
-        {{retryable-demo}}
-      {{/demo.example}}
+    <DocsDemo as |demo|>
+      <demo.example @name="retryable-demo-snippet.hbs">
+        <RetryableDemo />
+      </demo.example>
 
       {{demo.snippet "retryable-demo.js" label="component.js"}}
       {{demo.snippet "retryable-demo.hbs" label="template.hbs"}}
-    {{/docs-demo}}
+    </DocsDemo>
   </div>
 </div>

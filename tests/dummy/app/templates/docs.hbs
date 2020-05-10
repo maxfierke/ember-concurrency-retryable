@@ -1,6 +1,6 @@
-{{#docs-viewer as |viewer|}}
+<DocsViewer as |viewer|>
 
-  {{#viewer.nav as |nav|}}
+  <viewer.nav as |nav|>
     {{nav.section "Introduction"}}
     {{nav.item "What, Why, and How" "docs.index"}}
     {{nav.item "Usage" "docs.usage"}}
@@ -10,14 +10,14 @@
     {{nav.item "Events" "docs.events"}}
     {{nav.item "Looping Tasks" "docs.looping-tasks"}}
     {{nav.item "Testing" "docs.testing"}}
-  {{/viewer.nav}}
+  </viewer.nav>
 
-  {{#viewer.main}}
+  <viewer.main>
     <div class="docs-container">
       <div class="docs-section">
         {{outlet}}
       </div>
     </div>
-  {{/viewer.main}}
+  </viewer.main>
 
-{{/docs-viewer}}
+</DocsViewer>
