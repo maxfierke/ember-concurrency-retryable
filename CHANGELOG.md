@@ -1,5 +1,23 @@
 # Changelog
 
+### 0.7.0
+
+- Resets `retryCount` and `lastError` after task instance successfully retries.
+  * **Potentially breaking** if you're accessing these properties outside of the
+  context of a retry event or retry policy hook, but this is not really supported.
+- Add `retriedSignal` yieldable for manually designating when a looping task
+  has successfully retried. See documentation page on "Looping Tasks" for more
+  details and caveats.
+- Added `enableTaskRetries` and `disableTaskRetries` helper functions for
+  testing. Deprecated `disable` and `enable`.
+- Depends on ember-concurrency 1.0.0+
+
+### 0.6.0
+- Fixes an off-by-one bug in the default `DelayPolicy`, which also affects
+  `ExponentialBackoffPolicy`. May be a **potential breaking change** for
+  consumers of either class. The bug skipped the first delay and ended the
+  policy by going over, effectively causing the last delay to be 1ms.
+
 ### 0.5.0
 - Bumped `ember-cli-babel` dependency to the 7.x series.
 - Dropped support for ember-cli < 2.18
