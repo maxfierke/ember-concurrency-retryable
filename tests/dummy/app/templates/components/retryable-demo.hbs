@@ -1,6 +1,6 @@
 {{!-- BEGIN-SNIPPET retryable-demo.hbs --}}
 <ul>
-  {{#each logs as |log|}}
+  {{#each this.logs as |log|}}
     <li class="line-item line-item--{{log.color}}">{{log.message}}</li>
   {{/each}}
 </ul>
