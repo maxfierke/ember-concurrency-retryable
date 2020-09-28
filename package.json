@@ -81,5 +81,8 @@
   "ember-addon": {
     "configPath": "tests/dummy/config"
   },
-  "homepage": "https://maxfierke.github.io/ember-concurrency-retryable"
+  "homepage": "https://maxfierke.github.io/ember-concurrency-retryable",
+  "resolutions": {
+    "**/ember-concurrency": "^2.0.0-beta.1"
+  }
 }
