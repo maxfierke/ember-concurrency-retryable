@@ -1,5 +1,9 @@
 # Changelog
 
+### 0.8.0
+- Drop Node 8
+- Remove unneeded `ember-cli-htmlbars` dependency
+
 ### 0.7.0
 
 - Resets `retryCount` and `lastError` after task instance successfully retries.
