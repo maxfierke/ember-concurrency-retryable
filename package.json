@@ -1,6 +1,6 @@
 {
   "name": "ember-concurrency-retryable",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "description": "An Ember addon that adds retry strategies for ember-concurrency tasks",
   "keywords": [
     "ember-addon",
