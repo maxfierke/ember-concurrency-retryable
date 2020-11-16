@@ -1,10 +1,8 @@
-import {
-  yieldableSymbol,
-  YIELDABLE_CONTINUE
-} from 'ember-concurrency/utils';
-
 export const RETRYABLE_SYMBOL = '__ec_retryable_instance';
 
+// Private "symbols" from e-c. Copying until there's a public Yieldable API
+const yieldableSymbol = "__ec_yieldable__";
+const YIELDABLE_CONTINUE = "next";
 
 export const getTaskInstance = {
   [yieldableSymbol](taskInstance, resumeIndex) {

@@ -6,8 +6,8 @@ import {
   DelayPolicy,
   ExponentialBackoffPolicy,
   isEnabled,
-  disable,
-  enable
+  disableTaskRetries,
+  enableTaskRetries
 } from 'ember-concurrency-retryable';
 import PathExportedDefineModifier from 'ember-concurrency-retryable/define-modifier';
 import PathExportedPolicy from 'ember-concurrency-retryable/policies/base';
@@ -23,8 +23,8 @@ module('Unit: module exports', function() {
     assert.ok(DelayPolicy);
     assert.ok(ExponentialBackoffPolicy);
     assert.ok(isEnabled);
-    assert.ok(disable);
-    assert.ok(enable);
+    assert.ok(disableTaskRetries);
+    assert.ok(enableTaskRetries);
   });
 
   test("ember-concurrency-retryable/define-modifier", function(assert) {
