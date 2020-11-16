@@ -1,5 +1,9 @@
 # Changelog
 
+### 0.9.0
+- Support ember-concurrency v2 (in beta)
+- Removed deprecated `enable` and `disable` test helpers. Use `enableTaskRetries` and `disableTaskRetries`, respectively, instead.
+
 ### 0.8.0
 - Drop Node 8
 - Remove unneeded `ember-cli-htmlbars` dependency
