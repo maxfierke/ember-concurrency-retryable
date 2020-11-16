@@ -1,5 +1,5 @@
 import retryable from './retryable';
-import { TaskProperty } from 'ember-concurrency';
+import { TaskProperty } from 'ember-concurrency/-task-property';
 
 /*
  * Define a .retryable() modifier on TaskProperty
