@@ -2,6 +2,7 @@ import defineModifier from 'ember-concurrency-retryable/define-modifier';
 defineModifier();
 
 /* eslint-disable ember/no-on-calls-in-components */
+/* eslint-disable ember/no-classic-components */
 
 // BEGIN-SNIPPET retryable-demo.js
 import Component from '@ember/component';
@@ -20,6 +21,8 @@ const backoffPolicy = new ExponentialBackoffPolicy({
 });
 
 export default Component.extend({
+  tagName: '',
+
   ajaxTask: task(function * () {
     // simulate slow & unreliable AJAX
     const ms = 2000 + 2000 * Math.random();

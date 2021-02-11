@@ -1,4 +1,5 @@
-import { run, later } from '@ember/runloop';
+import { later } from '@ember/runloop';
+import { settled } from '@ember/test-helpers';
 import { Promise } from 'rsvp';
 import EmberObject from '@ember/object';
 import { task } from 'ember-concurrency';
@@ -6,7 +7,7 @@ import { module, test } from 'qunit';
 import { retryable, DelayPolicy } from 'ember-concurrency-retryable';
 
 module('Unit: wrapped task use', function() {
-  test("`TaskProperty`s can be extended as retryable by wrapping the task", function(assert) {
+  test("`TaskProperty`s can be extended as retryable by wrapping the task", async function(assert) {
     assert.expect(6);
 
     const DELAY_MS = 100;
@@ -27,34 +28,27 @@ module('Unit: wrapped task use', function() {
       }), delayPolicy)
     });
 
-    let obj;
+    let obj = Obj.create();
 
     assert.equal(taskAttemptCounter, 0);
 
-    run(() => {
-      obj = Obj.create();
+    await obj.get('doStuff').perform();
+    assert.equal(taskAttemptCounter, 1);
+
+    await obj.get('doStuff').perform();
+    assert.equal(taskAttemptCounter, 2);
+
+    obj.get('doStuff').perform();
+    assert.equal(taskAttemptCounter, 3);
+
+    later(() => {
+      assert.equal(taskAttemptCounter, 5);
+
       obj.get('doStuff').perform();
-      assert.equal(taskAttemptCounter, 1);
-    });
+      assert.equal(taskAttemptCounter, 6);
+      done();
+    }, (DELAY_MS * 2) + 10);
 
-
-    run(() => {
-      obj.get('doStuff').perform();
-
-      assert.equal(taskAttemptCounter, 2);
-    });
-
-    run(() => {
-      obj.get('doStuff').perform();
-      assert.equal(taskAttemptCounter, 3);
-
-      later(() => {
-        assert.equal(taskAttemptCounter, 5);
-
-        obj.get('doStuff').perform();
-        assert.equal(taskAttemptCounter, 6);
-        done();
-      }, (DELAY_MS * 2) + 10);
-    });
+    await settled();
   });
 });
