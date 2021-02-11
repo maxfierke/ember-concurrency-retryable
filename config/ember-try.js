@@ -10,7 +10,8 @@ module.exports = async function() {
         name: 'ember-lts-3.8',
         npm: {
           devDependencies: {
-            'ember-source': '~3.8.0'
+            'ember-source': '~3.8.0',
+            'ember-decorators-polyfill': '^1.1.5'
           }
         }
       },
@@ -99,7 +100,7 @@ module.exports = async function() {
         name: 'ember-concurrency-2.x',
         npm: {
           dependencies: {
-            'ember-concurrency': '^2.0.0-beta.1'
+            'ember-concurrency': '^2.0.0-rc.2'
           }
         }
       }

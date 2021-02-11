@@ -1,6 +1,5 @@
 import { isArray } from "@ember/array";
 import { assert } from '@ember/debug';
-import { get } from '@ember/object';
 import { timeout } from 'ember-concurrency';
 import Policy from './base';
 
@@ -41,7 +40,7 @@ export default class DelayPolicy extends Policy {
    * @return {boolean}
    */
   shouldRetry(retryInstance, reason) {
-    const retryAttempt = get(retryInstance, 'retryCount');
+    const retryAttempt = retryInstance.retryCount;
     const hasDelay = retryAttempt < this.delay.length;
 
     if (this.reasons.length > 0) {
@@ -67,7 +66,7 @@ export default class DelayPolicy extends Policy {
    * @return {IterableIterator<any>}
    */
   *retry(retryInstance) {
-    const retryCount = get(retryInstance, 'retryCount');
+    const retryCount = retryInstance.retryCount;
     const currentDelayMs = this.delay[retryCount - 1];
 
     assert("DelayPolicy.delay was unexpectedly exhausted.", Number.isFinite(currentDelayMs));
