@@ -5952,7 +5952,7 @@ ember-concurrency-decorators@^2.0.3:
     ember-cli-htmlbars "^4.3.1"
     ember-cli-typescript "^3.1.4"
 
-"ember-concurrency@^0.9.0 || ^0.10.0 || ^1.0.0", "ember-concurrency@^1.3.0 || ^2.0.0-rc.2", ember-concurrency@^2.0.0-rc.2:
+"ember-concurrency@^0.9.0 || ^0.10.0 || ^1.0.0", ember-concurrency@^2.0.0-rc.2:
   version "2.0.0-rc.2"
   resolved "https://registry.yarnpkg.com/ember-concurrency/-/ember-concurrency-2.0.0-rc.2.tgz#2e3a1cfa4fc104e0f4a3aa3effef9bab6f5af872"
   integrity sha512-byH4N3E3sQ8woCHFj5hi2DzIGSh5OsASn7lzibr/fGv+tO1IvZU6uIgGTs8TTZnzAxadtDthQri4sabrUX18DA==
@@ -5962,6 +5962,15 @@ ember-concurrency-decorators@^2.0.3:
     ember-cli-htmlbars "^5.3.1"
     ember-compatibility-helpers "^1.2.0"
     ember-destroyable-polyfill "^2.0.2"
+
+"ember-concurrency@^1.3.0 || ^2.0.0-beta.2":
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/ember-concurrency/-/ember-concurrency-1.3.0.tgz#66f90fb792687470bcee1172adc0ebf33f5e8b9c"
+  integrity sha512-DwGlfWFpYyAkTwsedlEtK4t1DznJSculAW6Vq5S1C0shVPc5b6tTpHB2FFYisannSYkm+wpm1f1Pd40qiNPtOQ==
+  dependencies:
+    ember-cli-babel "^7.7.3"
+    ember-compatibility-helpers "^1.2.0"
+    ember-maybe-import-regenerator "^0.1.6"
 
 "ember-data@2.x - 3.x":
   version "3.24.0"
@@ -6252,15 +6261,15 @@ ember-svg-jar@^2.2.3:
     path-posix "^1.0.0"
 
 ember-template-lint@^2.14.0:
-  version "2.15.0"
-  resolved "https://registry.yarnpkg.com/ember-template-lint/-/ember-template-lint-2.15.0.tgz#7a3b8dd97498bc777b4633f1a2a5ad63f63a6e77"
-  integrity sha512-hARl20XxqDbAPC68He1GBi0nDenJuy13Czo4NKaD72Vro+M3AxXOkKoSibeup1hxMAfuY/mWQYfqRij+bKWOhA==
+  version "2.18.1"
+  resolved "https://registry.yarnpkg.com/ember-template-lint/-/ember-template-lint-2.18.1.tgz#4b87c4093bac08d3a57cfd0d250652cbf72561a8"
+  integrity sha512-F81Y6oQRBHZyR41AV+YeTfdvwoAo0Eh8TbhNaKOSAmWK2X0GLdxhzem9a9VrnZGCji6cfzJrIPyHlYtUEAk0dw==
   dependencies:
     chalk "^4.0.0"
     ember-template-recast "^5.0.1"
     find-up "^5.0.0"
     get-stdin "^8.0.0"
-    globby "^11.0.1"
+    globby "^11.0.2"
     is-glob "^4.0.1"
     micromatch "^4.0.2"
     resolve "^1.19.0"
@@ -7619,10 +7628,10 @@ globby@10.0.0:
     merge2 "^1.2.3"
     slash "^3.0.0"
 
-globby@^11.0.1:
-  version "11.0.1"
-  resolved "https://registry.yarnpkg.com/globby/-/globby-11.0.1.tgz#9a2bf107a068f3ffeabc49ad702c79ede8cfd357"
-  integrity sha512-iH9RmgwCmUJHi2z5o2l3eTtGBtXek1OYlHrbcxOYugyHLmAsZrPj43OtHThd62Buh/Vv6VyCBD2bdyWcGNQqoQ==
+globby@^11.0.1, globby@^11.0.2:
+  version "11.0.2"
+  resolved "https://registry.yarnpkg.com/globby/-/globby-11.0.2.tgz#1af538b766a3b540ebfb58a32b2e2d5897321d83"
+  integrity sha512-2ZThXDvvV8fYFRVIxnrMQBipZQDr7MxKAmQK1vujaj9/7eF0efG7BPUKJ7jP7G5SLF37xKDXvO4S/KKLj/Z0og==
   dependencies:
     array-union "^2.1.0"
     dir-glob "^3.0.1"
