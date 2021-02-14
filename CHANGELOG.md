@@ -1,5 +1,8 @@
 # Changelog
 
+### 0.9.1
+- Support ember-concurrency 2.0.0-rc.1 and 2.0.0-rc.2
+
 ### 0.9.0
 - Support ember-concurrency v2 (in beta)
 - Removed deprecated `enable` and `disable` test helpers. Use `enableTaskRetries` and `disableTaskRetries`, respectively, instead.
