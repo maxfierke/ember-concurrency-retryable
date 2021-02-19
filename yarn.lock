@@ -5952,10 +5952,21 @@ ember-concurrency-decorators@^2.0.3:
     ember-cli-htmlbars "^4.3.1"
     ember-cli-typescript "^3.1.4"
 
-"ember-concurrency@^0.9.0 || ^0.10.0 || ^1.0.0", "ember-concurrency@^1.3.0 || ^2.0.0-rc.2", ember-concurrency@^2.0.0-rc.2:
+"ember-concurrency@^0.9.0 || ^0.10.0 || ^1.0.0", ember-concurrency@^2.0.0-rc.2:
   version "2.0.0-rc.2"
   resolved "https://registry.yarnpkg.com/ember-concurrency/-/ember-concurrency-2.0.0-rc.2.tgz#2e3a1cfa4fc104e0f4a3aa3effef9bab6f5af872"
   integrity sha512-byH4N3E3sQ8woCHFj5hi2DzIGSh5OsASn7lzibr/fGv+tO1IvZU6uIgGTs8TTZnzAxadtDthQri4sabrUX18DA==
+  dependencies:
+    "@glimmer/tracking" "^1.0.2"
+    ember-cli-babel "^7.22.1"
+    ember-cli-htmlbars "^5.3.1"
+    ember-compatibility-helpers "^1.2.0"
+    ember-destroyable-polyfill "^2.0.2"
+
+"ember-concurrency@^1.3.0 || ^2.0.0-beta.2":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/ember-concurrency/-/ember-concurrency-2.0.1.tgz#4326d6ed90241d8009c5035916dab1ebe58c6f9e"
+  integrity sha512-5cT1Id1n8I1F1d7xqtxD8LnqLfyxxlAbDxHazODmncwEyevkuLHxAMtw7HrcoDx8wr4zO59t3R2c+dnWJHNmsw==
   dependencies:
     "@glimmer/tracking" "^1.0.2"
     ember-cli-babel "^7.22.1"
@@ -6252,18 +6263,19 @@ ember-svg-jar@^2.2.3:
     path-posix "^1.0.0"
 
 ember-template-lint@^2.14.0:
-  version "2.15.0"
-  resolved "https://registry.yarnpkg.com/ember-template-lint/-/ember-template-lint-2.15.0.tgz#7a3b8dd97498bc777b4633f1a2a5ad63f63a6e77"
-  integrity sha512-hARl20XxqDbAPC68He1GBi0nDenJuy13Czo4NKaD72Vro+M3AxXOkKoSibeup1hxMAfuY/mWQYfqRij+bKWOhA==
+  version "2.19.0"
+  resolved "https://registry.yarnpkg.com/ember-template-lint/-/ember-template-lint-2.19.0.tgz#e493942ffc67cae9b1f11e0ec776dcc58c8aab02"
+  integrity sha512-x1cX8VLY2J4uMpFtn/hSGvBYNwRLV0w3Wnw02KetMGwuwdo214fVH/X95UDLZlBMPQL1yk0WAVwAd2qrNmE0Gg==
   dependencies:
     chalk "^4.0.0"
     ember-template-recast "^5.0.1"
     find-up "^5.0.0"
+    fuse.js "^6.4.6"
     get-stdin "^8.0.0"
-    globby "^11.0.1"
+    globby "^11.0.2"
     is-glob "^4.0.1"
     micromatch "^4.0.2"
-    resolve "^1.19.0"
+    resolve "^1.20.0"
     v8-compile-cache "^2.2.0"
     yargs "^16.2.0"
 
@@ -7415,6 +7427,11 @@ functional-red-black-tree@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/functional-red-black-tree/-/functional-red-black-tree-1.0.1.tgz#1b0ab3bd553b2a0d6399d29c0e3ea0b252078327"
 
+fuse.js@^6.4.6:
+  version "6.4.6"
+  resolved "https://registry.yarnpkg.com/fuse.js/-/fuse.js-6.4.6.tgz#62f216c110e5aa22486aff20be7896d19a059b79"
+  integrity sha512-/gYxR/0VpXmWSfZOIPS3rWwU8SHgsRTwWuXhyb2O6s7aRuVtHtxCkR33bNYu3wyLyNx/Wpv0vU7FZy8Vj53VNw==
+
 gauge@~2.7.3:
   version "2.7.4"
   resolved "https://registry.yarnpkg.com/gauge/-/gauge-2.7.4.tgz#2c03405c7538c39d7eb37b317022e325fb018bf7"
@@ -7619,10 +7636,10 @@ globby@10.0.0:
     merge2 "^1.2.3"
     slash "^3.0.0"
 
-globby@^11.0.1:
-  version "11.0.1"
-  resolved "https://registry.yarnpkg.com/globby/-/globby-11.0.1.tgz#9a2bf107a068f3ffeabc49ad702c79ede8cfd357"
-  integrity sha512-iH9RmgwCmUJHi2z5o2l3eTtGBtXek1OYlHrbcxOYugyHLmAsZrPj43OtHThd62Buh/Vv6VyCBD2bdyWcGNQqoQ==
+globby@^11.0.1, globby@^11.0.2:
+  version "11.0.2"
+  resolved "https://registry.yarnpkg.com/globby/-/globby-11.0.2.tgz#1af538b766a3b540ebfb58a32b2e2d5897321d83"
+  integrity sha512-2ZThXDvvV8fYFRVIxnrMQBipZQDr7MxKAmQK1vujaj9/7eF0efG7BPUKJ7jP7G5SLF37xKDXvO4S/KKLj/Z0og==
   dependencies:
     array-union "^2.1.0"
     dir-glob "^3.0.1"
@@ -8241,7 +8258,7 @@ is-callable@^1.1.4, is-callable@^1.1.5:
   resolved "https://registry.yarnpkg.com/is-callable/-/is-callable-1.1.5.tgz#f7e46b596890456db74e7f6e976cb3273d06faab"
   integrity sha512-ESKv5sMCJB2jnHTWZ3O5itG+O128Hsus4K4Qh1h2/cgn2vbgnLSVqfV46AeJA9D5EeeLa9w81KUXMtn34zhX+Q==
 
-is-core-module@^2.1.0:
+is-core-module@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/is-core-module/-/is-core-module-2.2.0.tgz#97037ef3d52224d85163f5597b2b63d9afed981a"
   integrity sha512-XRAfAdyyY5F5cOXn7hYQDqh2Xmii+DEfIcQGxK/uNwMHhIkPWO0g8msXcbzLe+MpGoR951MlqM/2iIlU4vKDdQ==
@@ -11077,12 +11094,12 @@ resolve@1.9.0:
   dependencies:
     path-parse "^1.0.6"
 
-resolve@^1.1.7, resolve@^1.10.0, resolve@^1.10.1, resolve@^1.11.1, resolve@^1.12.0, resolve@^1.13.1, resolve@^1.14.2, resolve@^1.17.0, resolve@^1.19.0, resolve@^1.3.3, resolve@^1.4.0, resolve@^1.5.0, resolve@^1.8.1:
-  version "1.19.0"
-  resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.19.0.tgz#1af5bf630409734a067cae29318aac7fa29a267c"
-  integrity sha512-rArEXAgsBG4UgRGcynxWIWKFvh/XZCcS8UJdHhwy91zwAvCZIbcs+vAbflgBnNjYMs/i/i+/Ux6IZhML1yPvxg==
+resolve@^1.1.7, resolve@^1.10.0, resolve@^1.10.1, resolve@^1.11.1, resolve@^1.12.0, resolve@^1.13.1, resolve@^1.14.2, resolve@^1.17.0, resolve@^1.20.0, resolve@^1.3.3, resolve@^1.4.0, resolve@^1.5.0, resolve@^1.8.1:
+  version "1.20.0"
+  resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.20.0.tgz#629a013fb3f70755d6f0b7935cc1c2c5378b1975"
+  integrity sha512-wENBPt4ySzg4ybFQW2TT1zMQucPK95HSh/nq2CFTZVOGut2+pQvSsgtda4d26YrYcr067wjbmzOG8byDPBX63A==
   dependencies:
-    is-core-module "^2.1.0"
+    is-core-module "^2.2.0"
     path-parse "^1.0.6"
 
 responselike@1.0.2:
