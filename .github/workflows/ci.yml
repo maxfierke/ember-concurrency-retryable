@@ -31,10 +31,6 @@
 #$     allowedToFail: true
 #$   - scenario: ember-classic
 #$     allowedToFail: false
-#$   - scenario: ember-concurrency-1.x
-#$     allowedToFail: false
-#$   - scenario: ember-concurrency-2.x
-#$     allowedToFail: false
 #$ nodeVersion: 10.x
 #$ packageManager: yarn
 #
@@ -191,9 +187,7 @@ jobs:
           ember-lts-3.20,
           ember-release,
           ember-beta,
-          ember-classic,
-          ember-concurrency-1.x,
-          ember-concurrency-2.x
+          ember-classic
         ]
         allow-failure: [false]
         include:
