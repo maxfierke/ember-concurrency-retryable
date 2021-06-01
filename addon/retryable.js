@@ -8,10 +8,10 @@ export default function retryable(taskProperty, retryPolicy) {
       policy: retryPolicy,
       context: this,
       fn: baseTaskFn,
-      args: args
+      args: args,
     });
     return yield* instance.run();
-  }
+  };
 
   return taskProperty;
 }

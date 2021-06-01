@@ -7,4 +7,3 @@ updates:
     time: "09:00"
   open-pull-requests-limit: 10
   versioning-strategy: widen
-  ignore: []

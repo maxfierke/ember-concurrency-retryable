@@ -21,7 +21,7 @@ module.exports = {
   },
   rules: {
     // violations
-    'ember/no-classic-classes': 'off'
+    'ember/no-classic-classes': 'off',
   },
   overrides: [
     // node files

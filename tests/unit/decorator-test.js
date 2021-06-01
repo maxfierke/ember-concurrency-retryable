@@ -3,8 +3,8 @@ import { module, test } from 'qunit';
 import { task } from 'ember-concurrency';
 import { DelayPolicy } from 'ember-concurrency-retryable';
 
-module('Unit: decorator use', function() {
-  test("retryable can be used via Task decorator", async function(assert) {
+module('Unit: decorator use', function () {
+  test('retryable can be used via Task decorator', async function (assert) {
     assert.expect(2);
 
     const DELAY_MS = 100;

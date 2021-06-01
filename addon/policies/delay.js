@@ -1,4 +1,4 @@
-import { isArray } from "@ember/array";
+import { isArray } from '@ember/array';
 import { assert } from '@ember/debug';
 import { timeout } from 'ember-concurrency';
 import Policy from './base';
@@ -22,8 +22,14 @@ export default class DelayPolicy extends Policy {
    */
   constructor({ delay = [], reasons = [] }) {
     super();
-    assert("The `delay` argument must be an array of Numbers representing milliseconds", isArray(delay) && delay.every(Number.isFinite));
-    assert("The `reasons` argument must be an array of potentially caught errors", isArray(reasons));
+    assert(
+      'The `delay` argument must be an array of Numbers representing milliseconds',
+      isArray(delay) && delay.every(Number.isFinite)
+    );
+    assert(
+      'The `reasons` argument must be an array of potentially caught errors',
+      isArray(reasons)
+    );
 
     this.delay = delay;
     this.reasons = reasons;
@@ -46,7 +52,7 @@ export default class DelayPolicy extends Policy {
     if (this.reasons.length > 0) {
       const reasonIsValid = this.reasons.some((r) => {
         if (typeof reason === 'object' && typeof r === 'function') {
-          return r === reason || reason instanceof r
+          return r === reason || reason instanceof r;
         }
         return r === reason;
       });
@@ -69,7 +75,10 @@ export default class DelayPolicy extends Policy {
     const retryCount = retryInstance.retryCount;
     const currentDelayMs = this.delay[retryCount - 1];
 
-    assert("DelayPolicy.delay was unexpectedly exhausted.", Number.isFinite(currentDelayMs));
+    assert(
+      'DelayPolicy.delay was unexpectedly exhausted.',
+      Number.isFinite(currentDelayMs)
+    );
 
     yield timeout(currentDelayMs);
     return yield* super.retry(retryInstance);
@@ -97,7 +106,7 @@ export default class DelayPolicy extends Policy {
    * @since 0.3.0
    */
 
-   /**
+  /**
    * Hook that is called after a task has been successfully retried.
    *
    * @method didRetry
