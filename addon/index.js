@@ -3,9 +3,7 @@ export { default as defineModifier } from './define-modifier';
 export { default as Policy } from './policies/base';
 export { default as DelayPolicy } from './policies/delay';
 export { default as ExponentialBackoffPolicy } from './policies/exponential-backoff';
-export {
-  retriedSignal
-} from './-private/yieldables';
+export { retriedSignal } from './-private/yieldables';
 
 let ENABLED = true;
 

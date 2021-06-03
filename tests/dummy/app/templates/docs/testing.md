@@ -18,10 +18,14 @@ test('testing some failure case', function (assert) {
 });
 ```
 
-**Ensure you call `enable` again if you rely on `ember-concurrency-retryable` working in other contexts.** This strategy for testing leaves a bit to be desired, so I'd like to investigate other strategies as well. As such, `enable`/`disable` may disappear in favor of something better. For now, it's a helpful escape hatch.
+**Ensure you call `enableTaskRetries` again if you rely on `ember-concurrency-retryable` working in other contexts.**
+This strategy for testing leaves a bit to be desired, so I'd like to investigate
+other strategies as well. As such, `enableTaskRetries`/`disableTaskRetries` may
+disappear in favor of something better. For now, it's a helpful escape hatch.
 
 Alternatively, if you export your policies, you may also choose to use a test
-double library like [sinon](http://sinonjs.org) to stub out the policy's `shouldRetry` function.
+double library like [sinon](http://sinonjs.org) to stub out the policy's
+`shouldRetry` function.
 
 
 ```javascript

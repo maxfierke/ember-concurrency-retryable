@@ -31,11 +31,11 @@
 #$     allowedToFail: true
 #$   - scenario: ember-classic
 #$     allowedToFail: false
-#$   - scenario: ember-concurrency-1.x
-#$     allowedToFail: false
-#$   - scenario: ember-concurrency-2.x
-#$     allowedToFail: false
-#$ nodeVersion: 10.x
+#$   - scenario: embroider-optimized
+#$     allowedToFail: true
+#$   - scenario: embroider-safe
+#$     allowedToFail: true
+#$ nodeVersion: 12.x
 #$ packageManager: yarn
 #
 
@@ -48,7 +48,7 @@ on:
   pull_request:
 
 env:
-  NODE_VERSION: '10.x'
+  NODE_VERSION: '12.x'
 
 jobs:
   lint:
@@ -178,7 +178,7 @@ jobs:
   try-scenarios:
     name: Tests - ${{ matrix.ember-try-scenario }}
     runs-on: ubuntu-latest
-    continue-on-error: ${{ matrix.allow-failure }}
+    continue-on-error: true
     needs: test
 
     strategy:
@@ -191,13 +191,18 @@ jobs:
           ember-lts-3.20,
           ember-release,
           ember-beta,
+          ember-canary,
           ember-classic,
-          ember-concurrency-1.x,
-          ember-concurrency-2.x
+          embroider-optimized,
+          embroider-safe
         ]
         allow-failure: [false]
         include:
           - ember-try-scenario: ember-canary
+            allow-failure: true
+          - ember-try-scenario: embroider-safe
+            allow-failure: true
+          - ember-try-scenario: embroider-optimized
             allow-failure: true
 
     steps:

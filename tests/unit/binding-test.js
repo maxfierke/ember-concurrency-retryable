@@ -5,8 +5,8 @@ import { module, test } from 'qunit';
 import sinon from 'sinon';
 import { Policy as NoopPolicy } from 'ember-concurrency-retryable';
 
-module('Unit: function context binding', function() {
-  test("ember-concurrency-retryable will preserve taskFn binding & args", function(assert) {
+module('Unit: function context binding', function () {
+  test('ember-concurrency-retryable will preserve taskFn binding & args', function (assert) {
     assert.expect(2);
 
     const done = assert.async(1);
@@ -20,12 +20,12 @@ module('Unit: function context binding', function() {
         this._super(...arguments);
 
         this.set('store', {
-          queryRecord: queryRecordStub
-        })
+          queryRecord: queryRecordStub,
+        });
       },
       getAThing: task(function* (value) {
         yield this.store.queryRecord('blahh', value);
-      }).retryable(delayPolicy)
+      }).retryable(delayPolicy),
     });
 
     let obj;
@@ -35,8 +35,14 @@ module('Unit: function context binding', function() {
 
       obj.get('getAThing').perform(123);
 
-      assert.ok(queryRecordStub.calledOnce, "expected queryRecord to have been called");
-      assert.ok(queryRecordStub.calledWith('blahh', 123), "expected arguments to make their way through");
+      assert.ok(
+        queryRecordStub.calledOnce,
+        'expected queryRecord to have been called'
+      );
+      assert.ok(
+        queryRecordStub.calledWith('blahh', 123),
+        'expected arguments to make their way through'
+      );
       done();
     });
   });

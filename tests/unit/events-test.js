@@ -8,8 +8,8 @@ import sinon from 'sinon';
 import DelayPolicy from 'ember-concurrency-retryable/policies/delay';
 import RetryableTaskInstance from 'ember-concurrency-retryable/-private/retryable-task-instance';
 
-module('Unit: events', function() {
-  test("evented() tasks fire retrying & retried events", function(assert) {
+module('Unit: events', function () {
+  test('evented() tasks fire retrying & retried events', function (assert) {
     assert.expect(7);
 
     const DELAY_MS = 100;
@@ -19,14 +19,14 @@ module('Unit: events', function() {
     let taskAttemptCounter = 0;
 
     const delayPolicy = new DelayPolicy({
-      delay: [DELAY_MS, DELAY_MS, DELAY_MS, DELAY_MS]
+      delay: [DELAY_MS, DELAY_MS, DELAY_MS, DELAY_MS],
     });
 
     const retryingStub = sinon.stub();
     const retriedStub = sinon.stub();
 
     let Obj = EmberObject.extend(Evented, {
-      doStuff: task(function * () {
+      doStuff: task(function* () {
         taskAttemptCounter++;
 
         if (taskAttemptCounter <= 3) {
@@ -34,10 +34,12 @@ module('Unit: events', function() {
         } else {
           yield Promise.resolve('stuff happened');
         }
-      }).evented().retryable(delayPolicy),
+      })
+        .evented()
+        .retryable(delayPolicy),
 
       onRetrying: on('doStuff:retrying', retryingStub),
-      onRetried: on('doStuff:retried', retriedStub)
+      onRetried: on('doStuff:retried', retriedStub),
     });
 
     let obj, taskInstance;
@@ -60,20 +62,26 @@ module('Unit: events', function() {
         3,
         'expected `retrying` event to be fired each time the taskFn is retried'
       );
-      assert.ok(retryingStub.alwaysCalledWith(
-        taskInstance,
-        sinon.match.instanceOf(RetryableTaskInstance)
-      ), 'expected retrying callback to have received correct arguments');
-      assert.ok(retriedStub.calledOnceWith(
-        taskInstance,
-        sinon.match.instanceOf(RetryableTaskInstance)
-      ), 'expected retried callback to have been called once with correct arguments');
+      assert.ok(
+        retryingStub.alwaysCalledWith(
+          taskInstance,
+          sinon.match.instanceOf(RetryableTaskInstance)
+        ),
+        'expected retrying callback to have received correct arguments'
+      );
+      assert.ok(
+        retriedStub.calledOnceWith(
+          taskInstance,
+          sinon.match.instanceOf(RetryableTaskInstance)
+        ),
+        'expected retried callback to have been called once with correct arguments'
+      );
       assert.ok(
         retriedStub.calledAfter(retryingStub),
         'expect `retried` to have been fired after `retrying`'
       );
 
       done();
-    }, ((DELAY_MS * 4) + 10));
+    }, DELAY_MS * 4 + 10);
   });
 });

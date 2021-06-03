@@ -29,7 +29,9 @@ export default class Policy {
    * @param {Error} error
    * @return {boolean}
    */
-  shouldRetry() { return false; }
+  shouldRetry() {
+    return false;
+  }
 
   /**
    * Hook that is called before the task is passed to the policy
