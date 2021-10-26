@@ -189,19 +189,15 @@ jobs:
           ember-lts-3.20,
           ember-lts-3.24,
           ember-release,
-          ember-beta,
-          ember-canary,
           ember-classic,
           embroider-optimized,
           embroider-safe
         ]
         allow-failure: [false]
         include:
+          - ember-try-scenario: ember-beta
+            allow-failure: true
           - ember-try-scenario: ember-canary
-            allow-failure: true
-          - ember-try-scenario: embroider-safe
-            allow-failure: true
-          - ember-try-scenario: embroider-optimized
             allow-failure: true
 
     steps:
