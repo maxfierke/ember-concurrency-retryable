@@ -119,22 +119,19 @@ module('Unit: DelayPolicy', function () {
 
     later(() => {
       obj = Obj.create();
-      obj
-        .doStuff
-        .perform()
-        .catch((e) => {
-          assert.equal(
-            e.message,
-            'I will never complete',
-            'expected to have thrown original error'
-          );
-          assert.equal(
-            taskAttemptCounter,
-            4,
-            'expected to have been run four times'
-          );
-          done();
-        });
+      obj.doStuff.perform().catch((e) => {
+        assert.equal(
+          e.message,
+          'I will never complete',
+          'expected to have thrown original error'
+        );
+        assert.equal(
+          taskAttemptCounter,
+          4,
+          'expected to have been run four times'
+        );
+        done();
+      });
       assert.equal(taskAttemptCounter, 1);
     }, 620);
   });
