@@ -44,7 +44,7 @@ module('Unit: hooks', function () {
     });
 
     run(() => {
-      obj.get('doStuff').perform();
+      obj.doStuff.perform();
       assert.equal(taskAttemptCounter, 1);
     });
 

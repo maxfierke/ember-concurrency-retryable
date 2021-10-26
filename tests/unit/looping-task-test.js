@@ -59,7 +59,7 @@ module('Unit: looping tasks', function () {
 
     run(() => {
       obj = Obj.create();
-      obj.get('doStuff').perform();
+      obj.doStuff.perform();
     });
 
     later(() => {

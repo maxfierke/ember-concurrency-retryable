@@ -103,21 +103,21 @@ module('Unit: ExponentialBackoffPolicy', function () {
 
     run(() => {
       obj = Obj.create();
-      obj.get('doStuff').perform();
+      obj.doStuff.perform();
     });
 
     assert.equal(taskAttemptCounter, 1);
     assert.notOk(willRetryStub.called, 'expect not to have started retrying');
 
     run(() => {
-      obj.get('doStuff').perform();
+      obj.doStuff.perform();
     });
 
     assert.equal(taskAttemptCounter, 2);
     assert.notOk(willRetryStub.called, 'expect not to have started retrying');
 
     run(() => {
-      obj.get('doStuff').perform();
+      obj.doStuff.perform();
     });
 
     assert.equal(taskAttemptCounter, 3);
@@ -127,7 +127,7 @@ module('Unit: ExponentialBackoffPolicy', function () {
       assert.equal(taskAttemptCounter, 5);
       assert.ok(willRetryStub.calledTwice, 'expect to have been retried twice');
 
-      obj.get('doStuff').perform();
+      obj.doStuff.perform();
       assert.equal(taskAttemptCounter, 6);
       done();
     }, 100 + 40);
@@ -159,22 +159,19 @@ module('Unit: ExponentialBackoffPolicy', function () {
 
     later(() => {
       obj = Obj.create();
-      obj
-        .get('doStuff')
-        .perform()
-        .catch((e) => {
-          assert.equal(
-            e.message,
-            'I will never complete',
-            'expected to have thrown original error'
-          );
-          assert.equal(
-            taskAttemptCounter,
-            7,
-            'expected to have been run seven times'
-          );
-          done();
-        });
+      obj.doStuff.perform().catch((e) => {
+        assert.equal(
+          e.message,
+          'I will never complete',
+          'expected to have thrown original error'
+        );
+        assert.equal(
+          taskAttemptCounter,
+          7,
+          'expected to have been run seven times'
+        );
+        done();
+      });
       assert.equal(taskAttemptCounter, 1);
     }, 10 + 20 + 40 + 80 + 160 + 320);
   });

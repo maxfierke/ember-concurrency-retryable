@@ -33,7 +33,7 @@ module('Unit: function context binding', function () {
     run(() => {
       obj = Obj.create();
 
-      obj.get('getAThing').perform(123);
+      obj.getAThing.perform(123);
 
       assert.ok(
         queryRecordStub.calledOnce,

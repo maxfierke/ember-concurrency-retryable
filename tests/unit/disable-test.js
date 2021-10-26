@@ -36,8 +36,7 @@ module('Unit: disabling retryability', function () {
       disableTaskRetries();
       assert.notOk(isEnabled(), 'expected retryablity to be disabled');
 
-      obj
-        .get('doStuff')
+      obj.doStuff
         .perform()
         .catch((e) => assert.equal(e.message, 'I will never complete'));
       assert.equal(taskAttemptCounter, 1);
@@ -49,8 +48,7 @@ module('Unit: disabling retryability', function () {
       enableTaskRetries();
       assert.ok(isEnabled(), 'expected retryablity to be enabled');
 
-      obj
-        .get('doStuff')
+      obj.doStuff
         .perform()
         .catch((e) => assert.equal(e.message, 'I will never complete'));
     });

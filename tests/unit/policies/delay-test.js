@@ -73,24 +73,24 @@ module('Unit: DelayPolicy', function () {
 
     run(() => {
       obj = Obj.create();
-      obj.get('doStuff').perform();
+      obj.doStuff.perform();
       assert.equal(taskAttemptCounter, 1);
     });
 
     run(() => {
-      obj.get('doStuff').perform();
+      obj.doStuff.perform();
 
       assert.equal(taskAttemptCounter, 2);
     });
 
     run(() => {
-      obj.get('doStuff').perform();
+      obj.doStuff.perform();
       assert.equal(taskAttemptCounter, 3);
 
       later(() => {
         assert.equal(taskAttemptCounter, 5);
 
-        obj.get('doStuff').perform();
+        obj.doStuff.perform();
         assert.equal(taskAttemptCounter, 6);
         done();
       }, DELAY_MS * 2 + 10);
@@ -120,7 +120,7 @@ module('Unit: DelayPolicy', function () {
     later(() => {
       obj = Obj.create();
       obj
-        .get('doStuff')
+        .doStuff
         .perform()
         .catch((e) => {
           assert.equal(

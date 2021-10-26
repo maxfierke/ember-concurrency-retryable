@@ -1,9 +1,9 @@
 import RetryableTaskInstance from './-private/retryable-task-instance';
 
-export default function retryable(taskProperty, retryPolicy) {
-  const baseTaskFn = taskProperty.taskFn;
+export default function retryable(taskFactory, retryPolicy) {
+  const baseTaskFn = taskFactory.taskDefinition;
 
-  taskProperty.taskFn = function* (...args) {
+  const wrappedTaskFn = function* (...args) {
     const instance = new RetryableTaskInstance({
       policy: retryPolicy,
       context: this,
@@ -12,6 +12,7 @@ export default function retryable(taskProperty, retryPolicy) {
     });
     return yield* instance.run();
   };
+  taskFactory.setTaskDefinition(wrappedTaskFn);
 
-  return taskProperty;
+  return taskFactory;
 }

@@ -51,7 +51,7 @@ module('Unit: events', function () {
     });
 
     run(() => {
-      taskInstance = obj.get('doStuff').perform();
+      taskInstance = obj.doStuff.perform();
       assert.equal(taskAttemptCounter, 1);
     });
 
