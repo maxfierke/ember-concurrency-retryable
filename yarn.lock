@@ -6120,9 +6120,10 @@ ember-composable-helpers@^4.4.1:
     ember-cli-babel "^7.11.1"
     resolve "^1.10.0"
 
-ember-concurrency@^2.0.0, "ember-concurrency@https://github.com/machty/ember-concurrency.git#master":
-  version "2.1.2"
-  resolved "https://github.com/machty/ember-concurrency.git#9eff68cddb50ce10c58bf91f8aad90e0fc2df5d4"
+ember-concurrency@^2.0.0, ember-concurrency@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/ember-concurrency/-/ember-concurrency-2.2.0.tgz#0acfb8ca855e0fdfa4c543be150028299a89ba32"
+  integrity sha512-Ns1MH6t08oJqfeWQ4EMxyf6bLsXM87SbUPwGNUsg7idpikvkGr1PWqtvU6qxDTv1mA4Vrwdhv0I9yxN0ShH9Bg==
   dependencies:
     "@glimmer/tracking" "^1.0.4"
     ember-cli-babel "^7.26.6"
