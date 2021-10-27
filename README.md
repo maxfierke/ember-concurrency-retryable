@@ -1,6 +1,6 @@
 # ember-concurrency-retryable
 
-[![Build Status](https://travis-ci.org/maxfierke/ember-concurrency-retryable.svg?branch=master)](https://travis-ci.org/maxfierke/ember-concurrency-retryable)
+[![Build Status](https://github.com/maxfierke/ember-concurrency-retryable/actions/workflows/ci.yml/badge.svg)](https://github.com/maxfierke/ember-concurrency-retryable/actions/workflows/ci.yml)
 [![npm version](https://badge.fury.io/js/ember-concurrency-retryable.svg)](https://badge.fury.io/js/ember-concurrency-retryable)
 [![Ember Observer Score](https://emberobserver.com/badges/ember-concurrency-retryable.svg)](https://emberobserver.com/addons/ember-concurrency-retryable)
 
@@ -9,9 +9,9 @@ retrying [ember-concurrency](https://github.com/machty/ember-concurrency) tasks.
 
 ## Compatibility
 
-* Ember.js v2.18 or above
-* Ember CLI v2.13 or above
-* ember-concurrency 1.0.0+
+* Ember.js v3.16 or above
+* Ember CLI v3.16 or above
+* ember-concurrency 2.2.0+
 
 ## Installation
 
