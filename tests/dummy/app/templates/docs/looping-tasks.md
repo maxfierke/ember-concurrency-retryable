@@ -11,9 +11,10 @@ There's no way for ember-concurrency-retryable to know whether the task
 successfully retried, unless it returns (and since it's an infinite loop, it does not.)
 
 To address this problem, ember-concurrency-retryable provides an escape-hatch in
-the form of a "yieldable" called `retriedSignal`. You can `yield` this at the bottom
-of your loop to indicate to ember-concurrency-retryable that the task body has
-been completed, and should be considered "retried".
+the form of a [Yieldable](http://ember-concurrency.com/docs/yieldables) called
+`retriedSignal`. You can `yield` this at the bottom of your loop to indicate to
+ember-concurrency-retryable that the task body has been completed, and should be
+considered "retried".
 
 *Note*: This is the **only** supported use-case for `retriedSignal`. Any other
 use may result in undefined behavior. Please exercise caution when using this
@@ -21,7 +22,7 @@ library-sanctioned leaky abstraction.
 
 ```javascript
 // components/flaky-component.js
-import Component from '@ember/component';
+import Component from '@glimmer/component';
 import { inject as service } from '@ember/service';
 import { task } from 'ember-concurrency';
 import { DelayPolicy, retriedSignal } from 'ember-concurrency-retryable';
@@ -33,17 +34,23 @@ const myDelayPolicy = new DelayPolicy({
   reasons: [UnavailableError]
 });
 
-export default Component.extend({
-  widgetStore: service(),
+export default class LoopingTaskComponent extends Component {
+  @service widgetStore;
 
-  widgetPoll: task(function*() {
+  constructor() {
+    super(...arguments);
+    this.widgetPoll.perform();
+  }
+
+  @task({ retryable: myDelayPolicy })
+  *widgetPoll() {
     while(true) {
       const widgets = yield getWidgetsFromFlakyApi();
-      widgetStore.setWidgets(widgets);
+      this.widgetStore.setWidgets(widgets);
       yield timeout(10000);
 
       yield retriedSignal;
     }
-  }).on('init').retryable(myDelayPolicy)
-});
+  }
+}
 ```

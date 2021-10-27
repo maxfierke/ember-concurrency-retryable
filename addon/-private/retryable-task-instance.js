@@ -1,8 +1,5 @@
-import { isEnabled } from "../index";
-import {
-  getTaskInstance,
-  RETRYABLE_SYMBOL
-} from "./yieldables";
+import { isEnabled } from '../index';
+import { getTaskInstance, RETRYABLE_SYMBOL } from './yieldables';
 
 const EMPTY_RETRIES = 0;
 
@@ -12,7 +9,7 @@ const EMPTY_RETRIES = 0;
  * policy hooks and ember-concurrency-retryable lifecycle events.
  *
  * @class RetryableTaskInstance
-*/
+ */
 export default class RetryableTaskInstance {
   /**
    * Fired when a task instance is retried in accordance with its
@@ -73,7 +70,7 @@ export default class RetryableTaskInstance {
   *run() {
     try {
       return yield* this.fn.apply(this.context, this.args);
-    } catch(e) {
+    } catch (e) {
       if (!this.taskInstance) {
         this.taskInstance = yield getTaskInstance;
         this.taskInstance[RETRYABLE_SYMBOL] = this;
@@ -113,9 +110,8 @@ export default class RetryableTaskInstance {
 
   _triggerEvent(eventName, ...args) {
     const taskInstance = this.taskInstance;
-    const triggerEvent = taskInstance.triggerEvent || taskInstance._triggerEvent;
     const eventArgs = [taskInstance, this, ...args];
-    triggerEvent.call(taskInstance, eventName, ...eventArgs);
+    taskInstance.triggerEvent.call(taskInstance, eventName, ...eventArgs);
   }
 }
 

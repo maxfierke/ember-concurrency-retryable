@@ -1,8 +1,8 @@
 # Events
 
-If you're using ember-concurrency >= 0.8.18, you can also listen to a few
-ember-concurrency-retryable lifecycle events in addition to those provided by
-ember-concurrency when using the `.evented()` modifier.
+You can also listen to a few ember-concurrency-retryable lifecycle events in
+addition to those provided by ember-concurrency when using the `.evented()`
+modifier.
 
 ## `TASK_NAME:retrying`
 Fired each time the task instance is retrying. This can be multiple times for each task

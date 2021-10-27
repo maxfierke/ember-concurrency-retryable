@@ -8,8 +8,8 @@ import sinon from 'sinon';
 import DelayPolicy from 'ember-concurrency-retryable/policies/delay';
 import RetryableTaskInstance from 'ember-concurrency-retryable/-private/retryable-task-instance';
 
-module('Unit: state', function() {
-  test("resets retryable state after task is retried successfully", function(assert) {
+module('Unit: state', function () {
+  test('resets retryable state after task is retried successfully', function (assert) {
     assert.expect(8);
 
     const DELAY_MS = 100;
@@ -22,13 +22,13 @@ module('Unit: state', function() {
     let lastRetryableInstance = null;
 
     const delayPolicy = new DelayPolicy({
-      delay: [DELAY_MS, DELAY_MS, DELAY_MS, DELAY_MS]
+      delay: [DELAY_MS, DELAY_MS, DELAY_MS, DELAY_MS],
     });
 
     const retriedStub = sinon.stub();
 
     let Obj = EmberObject.extend(Evented, {
-      doStuff: task(function * () {
+      doStuff: task(function* () {
         taskAttemptCounter++;
 
         if (taskAttemptCounter <= 3) {
@@ -36,14 +36,16 @@ module('Unit: state', function() {
         } else {
           yield Promise.resolve('stuff happened');
         }
-      }).evented().retryable(delayPolicy),
+      })
+        .evented()
+        .retryable(delayPolicy),
 
-      onRetried: on('doStuff:retried', function(_ti, retryableTaskInstance) {
+      onRetried: on('doStuff:retried', function (_ti, retryableTaskInstance) {
         lastRetryCount = retryableTaskInstance.retryCount;
         lastRetryError = retryableTaskInstance.lastError;
         lastRetryableInstance = retryableTaskInstance;
         retriedStub(_ti, retryableTaskInstance);
-      })
+      }),
     });
 
     let obj, taskInstance;
@@ -55,22 +57,33 @@ module('Unit: state', function() {
     });
 
     run(() => {
-      taskInstance = obj.get('doStuff').perform();
+      taskInstance = obj.doStuff.perform();
       assert.equal(taskAttemptCounter, 1);
     });
 
     later(() => {
       assert.equal(taskAttemptCounter, 4);
-      assert.ok(retriedStub.calledOnceWith(
-        taskInstance,
-        sinon.match.instanceOf(RetryableTaskInstance)
-      ), 'expected retried callback to have been called once with correct arguments');
-      assert.equal(lastRetryCount, 3, 'retried hook is called before retryCount is reset');
+      assert.ok(
+        retriedStub.calledOnceWith(
+          taskInstance,
+          sinon.match.instanceOf(RetryableTaskInstance)
+        ),
+        'expected retried callback to have been called once with correct arguments'
+      );
+      assert.equal(
+        lastRetryCount,
+        3,
+        'retried hook is called before retryCount is reset'
+      );
       assert.equal(lastRetryableInstance.retryCount, 0);
-      assert.equal(lastRetryError, EXPECTED_ERROR, 'retried hook is called before lastError is reset');
+      assert.equal(
+        lastRetryError,
+        EXPECTED_ERROR,
+        'retried hook is called before lastError is reset'
+      );
       assert.equal(lastRetryableInstance.lastError, null);
 
       done();
-    }, ((DELAY_MS * 4) + 10));
+    }, DELAY_MS * 4 + 10);
   });
 });

@@ -1,7 +1,7 @@
 import { helper } from '@ember/component/helper';
 import { htmlSafe } from '@ember/string';
 
-export function colorString([color]/*, hash*/) {
+export function colorString([color] /*, hash*/) {
   return new htmlSafe(`color: ${color};`);
 }
 

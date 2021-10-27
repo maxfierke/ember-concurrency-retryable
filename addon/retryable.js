@@ -1,20 +1,18 @@
-import { assert } from '@ember/debug';
 import RetryableTaskInstance from './-private/retryable-task-instance';
 
-export default function retryable(taskProperty, retryPolicy) {
-  assert("retryable() will only work with ember-concurrency >=0.7.19 -- please upgrade", taskProperty.taskFn);
+export default function retryable(taskFactory, retryPolicy) {
+  const baseTaskFn = taskFactory.taskDefinition;
 
-  const baseTaskFn = taskProperty.taskFn;
-
-  taskProperty.taskFn = function* (...args) {
+  const wrappedTaskFn = function* (...args) {
     const instance = new RetryableTaskInstance({
       policy: retryPolicy,
       context: this,
       fn: baseTaskFn,
-      args: args
+      args: args,
     });
     return yield* instance.run();
-  }
+  };
+  taskFactory.setTaskDefinition(wrappedTaskFn);
 
-  return taskProperty;
+  return taskFactory;
 }

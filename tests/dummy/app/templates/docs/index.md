@@ -1,6 +1,6 @@
 # Introduction
 
-[![Build Status](https://travis-ci.org/maxfierke/ember-concurrency-retryable.svg?branch=master)](https://travis-ci.org/maxfierke/ember-concurrency-retryable)
+![CI](https://github.com/maxfierke/ember-concurrency-retryable/actions/workflows/ci.yml/badge.svg)
 [![npm version](https://badge.fury.io/js/ember-concurrency-retryable.svg)](https://badge.fury.io/js/ember-concurrency-retryable)
 [![Ember Observer Score](https://emberobserver.com/badges/ember-concurrency-retryable.svg)](https://emberobserver.com/addons/ember-concurrency-retryable)
 
@@ -18,14 +18,14 @@ routine network blips, API failures, etc.
 Some use-cases for automatic retrying of tasks:
 
 * Long-polling tasks
-    * Background auto-saves
+  * Background auto-saves
 * Telemetry/analytics
 * Integrations w/ 3rd party APIs that don't quite have five 9s (or three)
 * Applications that deal with periodic resource contention
-    * e.g. app talks to a cloud storage API in files might be *locked* for a
-      few seconds while some other system is working on it.
+  * e.g. app talks to a cloud storage API in files might be *locked* for a
+    few seconds while some other system is working on it.
 * Anything async that is prone to *transient failure*
-    * e.g. Geolocation API failures while a mobile user is in transit
+  * e.g. Geolocation API failures while a mobile user is in transit
 
 This work comes out of [an RFC](https://github.com/machty/ember-concurrency/issues/183) opened against `ember-concurrency` a while ago.
 After discussion on the RFC, it seemed like it would be best to implement this

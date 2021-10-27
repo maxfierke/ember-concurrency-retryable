@@ -1,5 +1,15 @@
 # Changelog
 
+### Unreleased
+
+#### Breaking changes
+
+- Drop support for ember-concurrency < 2.2.0
+- Drop support for Node 10 (EOL)
+- Drop support for < 3.16
+- Drop support for wrapping tasks with `retryable`.
+  Must use `retryable` via decorator or `.retryable()` on classic tasks.
+
 ### 0.9.1
 - Support ember-concurrency 2.0.0-rc.1 and 2.0.0-rc.2
 

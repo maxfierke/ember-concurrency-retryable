@@ -7,8 +7,8 @@ import sinon from 'sinon';
 import DelayPolicy from 'ember-concurrency-retryable/policies/delay';
 import RetryableTaskInstance from 'ember-concurrency-retryable/-private/retryable-task-instance';
 
-module('Unit: hooks', function() {
-  test("Retryable tasks have lifecycle hooks", function(assert) {
+module('Unit: hooks', function () {
+  test('Retryable tasks have lifecycle hooks', function (assert) {
     assert.expect(9);
 
     const DELAY_MS = 100;
@@ -24,7 +24,7 @@ module('Unit: hooks', function() {
     const didRetryStub = sinon.stub(delayPolicy, 'didRetry');
 
     let Obj = EmberObject.extend({
-      doStuff: task(function * () {
+      doStuff: task(function* () {
         taskAttemptCounter++;
 
         if (taskAttemptCounter === 1) {
@@ -32,7 +32,7 @@ module('Unit: hooks', function() {
         } else {
           yield Promise.resolve('stuff happened');
         }
-      }).retryable(delayPolicy)
+      }).retryable(delayPolicy),
     });
 
     let obj;
@@ -44,29 +44,41 @@ module('Unit: hooks', function() {
     });
 
     run(() => {
-      obj.get('doStuff').perform();
+      obj.doStuff.perform();
       assert.equal(taskAttemptCounter, 1);
     });
 
-    assert.ok(didErrorStub.calledOnceWith(
-      sinon.match.instanceOf(RetryableTaskInstance),
-      EXPECTED_ERROR
-    ), 'expected didError to have been called with the retry instance & error');
-    assert.ok(willRetryStub.calledOnceWith(
-      sinon.match.instanceOf(RetryableTaskInstance),
-      EXPECTED_ERROR
-    ), 'expected willRetry to have been called with the retry instance & error');
+    assert.ok(
+      didErrorStub.calledOnceWith(
+        sinon.match.instanceOf(RetryableTaskInstance),
+        EXPECTED_ERROR
+      ),
+      'expected didError to have been called with the retry instance & error'
+    );
+    assert.ok(
+      willRetryStub.calledOnceWith(
+        sinon.match.instanceOf(RetryableTaskInstance),
+        EXPECTED_ERROR
+      ),
+      'expected willRetry to have been called with the retry instance & error'
+    );
     assert.ok(
       willRetryStub.calledAfter(didErrorStub),
       'expect willRetry to have been called after didError'
     );
-    assert.notOk(didRetryStub.called, 'expect not to have completed retrying yet');
+    assert.notOk(
+      didRetryStub.called,
+      'expect not to have completed retrying yet'
+    );
 
     later(() => {
       assert.equal(taskAttemptCounter, 2);
-      assert.ok(didRetryStub.calledOnceWith(
-        sinon.match.instanceOf(RetryableTaskInstance)
-      ), 'expected didRetry to have been called with the retry instance');
+      assert.ok(
+        didRetryStub.calledOnceWith(
+          sinon.match.instanceOf(RetryableTaskInstance)
+        ),
+        'expected didRetry to have been called with the retry instance'
+      );
       assert.ok(
         didRetryStub.calledAfter(willRetryStub),
         'expect didRetry to have been called after willRetry'

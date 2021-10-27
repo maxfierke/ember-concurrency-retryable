@@ -6,11 +6,11 @@ import {
   isEnabled,
   enableTaskRetries,
   disableTaskRetries,
-  DelayPolicy
+  DelayPolicy,
 } from 'ember-concurrency-retryable';
 
-module('Unit: disabling retryability', function() {
-  test("ember-concurrency-retryable can be disabled to ease testing of failure and remove delays", function(assert) {
+module('Unit: disabling retryability', function () {
+  test('ember-concurrency-retryable can be disabled to ease testing of failure and remove delays', function (assert) {
     assert.expect(7);
 
     const done = assert.async(1);
@@ -21,9 +21,9 @@ module('Unit: disabling retryability', function() {
     let Obj = EmberObject.extend({
       doStuff: task(function* () {
         taskAttemptCounter++;
-        yield "hello";
+        yield 'hello';
         throw new Error('I will never complete');
-      }).retryable(delayPolicy)
+      }).retryable(delayPolicy),
     });
 
     let obj;
@@ -34,9 +34,11 @@ module('Unit: disabling retryability', function() {
       obj = Obj.create();
 
       disableTaskRetries();
-      assert.notOk(isEnabled(), "expected retryablity to be disabled");
+      assert.notOk(isEnabled(), 'expected retryablity to be disabled');
 
-      obj.get('doStuff').perform().catch((e) => assert.equal(e.message, 'I will never complete'));
+      obj.doStuff
+        .perform()
+        .catch((e) => assert.equal(e.message, 'I will never complete'));
       assert.equal(taskAttemptCounter, 1);
     });
 
@@ -44,9 +46,11 @@ module('Unit: disabling retryability', function() {
       taskAttemptCounter = 0;
 
       enableTaskRetries();
-      assert.ok(isEnabled(), "expected retryablity to be enabled");
+      assert.ok(isEnabled(), 'expected retryablity to be enabled');
 
-      obj.get('doStuff').perform().catch((e) => assert.equal(e.message, 'I will never complete'));
+      obj.doStuff
+        .perform()
+        .catch((e) => assert.equal(e.message, 'I will never complete'));
     });
 
     later(() => {
