@@ -1172,6 +1172,15 @@
     ember-cli-version-checker "^5.1.2"
     semver "^7.3.2"
 
+"@embroider/addon-shim@^1.0.0":
+  version "1.8.7"
+  resolved "https://registry.yarnpkg.com/@embroider/addon-shim/-/addon-shim-1.8.7.tgz#ba2dcb0647ed2cb0c500c835326266b89ceec595"
+  integrity sha512-JGOQNRj3UR0NdWEg8MsM2eqPLncEwSB1IX+rwntIj22TEKj8biqx7GDgSbeH+ZedijmCh354Hf2c5rthrdzUAw==
+  dependencies:
+    "@embroider/shared-internals" "^2.5.1"
+    broccoli-funnel "^3.0.8"
+    semver "^7.3.8"
+
 "@embroider/core@0.33.0", "@embroider/core@^0.33.0":
   version "0.33.0"
   resolved "https://registry.yarnpkg.com/@embroider/core/-/core-0.33.0.tgz#0fb1752d6e34ea45368e65c42e13220a57ffae76"
@@ -1263,6 +1272,21 @@
     resolve-package-path "^1.2.2"
     semver "^7.3.2"
     typescript-memoize "^1.0.0-alpha.3"
+
+"@embroider/shared-internals@^2.5.1":
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/@embroider/shared-internals/-/shared-internals-2.5.1.tgz#a4d8c057cbff293ef6eb29ee6537f263d206b444"
+  integrity sha512-b+TWDBisH1p6HeTbJIO8pgu1WzfTP0ZSAlZBqjXwOyrS0ZxP1qNYRrEX+IxyzIibEFjXBxeLakiejz3DJvZX5A==
+  dependencies:
+    babel-import-util "^2.0.0"
+    debug "^4.3.2"
+    ember-rfc176-data "^0.3.17"
+    fs-extra "^9.1.0"
+    js-string-escape "^1.0.1"
+    lodash "^4.17.21"
+    resolve-package-path "^4.0.1"
+    semver "^7.3.5"
+    typescript-memoize "^1.0.1"
 
 "@embroider/test-setup@^0.47.0":
   version "0.47.0"
@@ -2789,6 +2813,11 @@ babel-helpers@^6.24.1:
   dependencies:
     babel-runtime "^6.22.0"
     babel-template "^6.24.1"
+
+babel-import-util@^2.0.0:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/babel-import-util/-/babel-import-util-2.0.1.tgz#263a2963ee9208428c04f05326c6ea32b2206ac6"
+  integrity sha512-N1ZfNprtf/37x0R05J0QCW/9pCAcuI+bjZIK9tlu0JEkwEST7ssdD++gxHRbD58AiG5QE5OuNYhRoEFsc1wESw==
 
 babel-loader@^8.0.6:
   version "8.0.6"
@@ -5157,6 +5186,13 @@ debug@^4.0.0, debug@^4.0.1, debug@^4.1.0, debug@^4.1.1, debug@^4.3.1:
   dependencies:
     ms "2.1.2"
 
+debug@^4.3.2:
+  version "4.3.4"
+  resolved "https://registry.yarnpkg.com/debug/-/debug-4.3.4.tgz#1319f6579357f2338d3337d2cdd4914bb5dcc865"
+  integrity sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==
+  dependencies:
+    ms "2.1.2"
+
 debug@~3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/debug/-/debug-3.1.0.tgz#5bb5a0672628b64149566ba16819e61518c67261"
@@ -6274,12 +6310,12 @@ ember-modifier@^2.1.1:
     ember-destroyable-polyfill "^2.0.2"
     ember-modifier-manager-polyfill "^1.2.0"
 
-ember-page-title@^6.2.1:
-  version "6.2.2"
-  resolved "https://registry.yarnpkg.com/ember-page-title/-/ember-page-title-6.2.2.tgz#980838c44e96cba1d00f42435d707936af627324"
-  integrity sha512-YTXA+cylZrh9zO0zwjlaAGReT2MVOxAMnVO1OOygFrs1JBs4D6CKV3tImoilg3AvIXFBeJfFNNUbJOdRd9IGGg==
+ember-page-title@^8.0.0:
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/ember-page-title/-/ember-page-title-8.0.0.tgz#544377cee81bc4b7664fe903bc3e3e59f93ca3cc"
+  integrity sha512-4bu8CpoPObJZNUogwIjpntxS3jMDlZ1eoJsZUuktcCgOI7LfZocuYbu9LnLM215QjEOV0TxGDWwJck1l8cWKeg==
   dependencies:
-    ember-cli-babel "^7.23.1"
+    "@embroider/addon-shim" "^1.0.0"
 
 ember-qunit@^5.1.4:
   version "5.1.4"
@@ -11664,6 +11700,13 @@ semver@^7.0.0, semver@^7.1.3, semver@^7.2.1, semver@^7.3.2, semver@^7.3.4, semve
   version "7.3.5"
   resolved "https://registry.yarnpkg.com/semver/-/semver-7.3.5.tgz#0b621c879348d8998e4b0e4be94b3f12e6018ef7"
   integrity sha512-PoeGJYh8HK4BTO/a9Tf6ZG3veo/A7ZVsYrSA6J8ny9nb3B1VrpkuN+z9OE5wfE5p6H4LchYZsegiQgbJD94ZFQ==
+  dependencies:
+    lru-cache "^6.0.0"
+
+semver@^7.3.8:
+  version "7.5.4"
+  resolved "https://registry.yarnpkg.com/semver/-/semver-7.5.4.tgz#483986ec4ed38e1c6c48c34894a9182dbff68a6e"
+  integrity sha512-1bCSESV6Pv+i21Hvpxp3Dx+pSD8lIPt8uVjRrxAUt/nbswYc+tK6Y2btiULjd4+fnq15PX+nqQDC7Oft7WkwcA==
   dependencies:
     lru-cache "^6.0.0"
 
